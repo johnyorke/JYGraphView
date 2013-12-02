@@ -1,0 +1,478 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CA4F167C184D0CB600AE2475 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA4F167B184D0CB600AE2475 /* Foundation.framework */; };
+		CA4F167E184D0CB600AE2475 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA4F167D184D0CB600AE2475 /* CoreGraphics.framework */; };
+		CA4F1680184D0CB600AE2475 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA4F167F184D0CB600AE2475 /* UIKit.framework */; };
+		CA4F1686184D0CB600AE2475 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA4F1684184D0CB600AE2475 /* InfoPlist.strings */; };
+		CA4F1688184D0CB600AE2475 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4F1687184D0CB600AE2475 /* main.m */; };
+		CA4F168C184D0CB600AE2475 /* JYGraphAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4F168B184D0CB600AE2475 /* JYGraphAppDelegate.m */; };
+		CA4F1694184D0CB600AE2475 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA4F1693184D0CB600AE2475 /* Images.xcassets */; };
+		CA4F169B184D0CB600AE2475 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA4F169A184D0CB600AE2475 /* XCTest.framework */; };
+		CA4F169C184D0CB600AE2475 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA4F167B184D0CB600AE2475 /* Foundation.framework */; };
+		CA4F169D184D0CB600AE2475 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA4F167F184D0CB600AE2475 /* UIKit.framework */; };
+		CA4F16A5184D0CB600AE2475 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CA4F16A3184D0CB600AE2475 /* InfoPlist.strings */; };
+		CA4F16A7184D0CB600AE2475 /* JYGraphViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4F16A6184D0CB600AE2475 /* JYGraphViewControllerTests.m */; };
+		CA4F16B6184D0CDB00AE2475 /* JYGraphMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4F16B1184D0CDB00AE2475 /* JYGraphMenuViewController.m */; };
+		CA4F16B7184D0CDB00AE2475 /* JYGraphMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA4F16B2184D0CDB00AE2475 /* JYGraphMenuViewController.xib */; };
+		CA4F16B8184D0CDB00AE2475 /* JYGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4F16B4184D0CDB00AE2475 /* JYGraphViewController.m */; };
+		CA4F16B9184D0CDB00AE2475 /* JYGraphViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA4F16B5184D0CDB00AE2475 /* JYGraphViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CA4F169E184D0CB600AE2475 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA4F1670184D0CB600AE2475 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA4F1677184D0CB600AE2475;
+			remoteInfo = JYGraphViewController;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CA4F1678184D0CB600AE2475 /* JYGraphViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JYGraphViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA4F167B184D0CB600AE2475 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CA4F167D184D0CB600AE2475 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CA4F167F184D0CB600AE2475 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CA4F1683184D0CB600AE2475 /* JYGraphViewController-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JYGraphViewController-Info.plist"; sourceTree = "<group>"; };
+		CA4F1685184D0CB600AE2475 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CA4F1687184D0CB600AE2475 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CA4F1689184D0CB600AE2475 /* JYGraphViewController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JYGraphViewController-Prefix.pch"; sourceTree = "<group>"; };
+		CA4F168A184D0CB600AE2475 /* JYGraphAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYGraphAppDelegate.h; sourceTree = "<group>"; };
+		CA4F168B184D0CB600AE2475 /* JYGraphAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYGraphAppDelegate.m; sourceTree = "<group>"; };
+		CA4F1693184D0CB600AE2475 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CA4F1699184D0CB600AE2475 /* JYGraphViewControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JYGraphViewControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA4F169A184D0CB600AE2475 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		CA4F16A2184D0CB600AE2475 /* JYGraphViewControllerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JYGraphViewControllerTests-Info.plist"; sourceTree = "<group>"; };
+		CA4F16A4184D0CB600AE2475 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CA4F16A6184D0CB600AE2475 /* JYGraphViewControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYGraphViewControllerTests.m; sourceTree = "<group>"; };
+		CA4F16B0184D0CDB00AE2475 /* JYGraphMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYGraphMenuViewController.h; sourceTree = "<group>"; };
+		CA4F16B1184D0CDB00AE2475 /* JYGraphMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYGraphMenuViewController.m; sourceTree = "<group>"; };
+		CA4F16B2184D0CDB00AE2475 /* JYGraphMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JYGraphMenuViewController.xib; sourceTree = "<group>"; };
+		CA4F16B3184D0CDB00AE2475 /* JYGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYGraphViewController.h; sourceTree = "<group>"; };
+		CA4F16B4184D0CDB00AE2475 /* JYGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYGraphViewController.m; sourceTree = "<group>"; };
+		CA4F16B5184D0CDB00AE2475 /* JYGraphViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JYGraphViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CA4F1675184D0CB600AE2475 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA4F167E184D0CB600AE2475 /* CoreGraphics.framework in Frameworks */,
+				CA4F1680184D0CB600AE2475 /* UIKit.framework in Frameworks */,
+				CA4F167C184D0CB600AE2475 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA4F1696184D0CB600AE2475 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA4F169B184D0CB600AE2475 /* XCTest.framework in Frameworks */,
+				CA4F169D184D0CB600AE2475 /* UIKit.framework in Frameworks */,
+				CA4F169C184D0CB600AE2475 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CA4F166F184D0CB600AE2475 = {
+			isa = PBXGroup;
+			children = (
+				CA4F1681184D0CB600AE2475 /* JYGraphViewController */,
+				CA4F16A0184D0CB600AE2475 /* JYGraphViewControllerTests */,
+				CA4F167A184D0CB600AE2475 /* Frameworks */,
+				CA4F1679184D0CB600AE2475 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CA4F1679184D0CB600AE2475 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CA4F1678184D0CB600AE2475 /* JYGraphViewController.app */,
+				CA4F1699184D0CB600AE2475 /* JYGraphViewControllerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CA4F167A184D0CB600AE2475 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CA4F167B184D0CB600AE2475 /* Foundation.framework */,
+				CA4F167D184D0CB600AE2475 /* CoreGraphics.framework */,
+				CA4F167F184D0CB600AE2475 /* UIKit.framework */,
+				CA4F169A184D0CB600AE2475 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CA4F1681184D0CB600AE2475 /* JYGraphViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CA4F168A184D0CB600AE2475 /* JYGraphAppDelegate.h */,
+				CA4F168B184D0CB600AE2475 /* JYGraphAppDelegate.m */,
+				CA4F16B0184D0CDB00AE2475 /* JYGraphMenuViewController.h */,
+				CA4F16B1184D0CDB00AE2475 /* JYGraphMenuViewController.m */,
+				CA4F16B2184D0CDB00AE2475 /* JYGraphMenuViewController.xib */,
+				CA4F16B3184D0CDB00AE2475 /* JYGraphViewController.h */,
+				CA4F16B4184D0CDB00AE2475 /* JYGraphViewController.m */,
+				CA4F16B5184D0CDB00AE2475 /* JYGraphViewController.xib */,
+				CA4F1693184D0CB600AE2475 /* Images.xcassets */,
+				CA4F1682184D0CB600AE2475 /* Supporting Files */,
+			);
+			path = JYGraphViewController;
+			sourceTree = "<group>";
+		};
+		CA4F1682184D0CB600AE2475 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CA4F1683184D0CB600AE2475 /* JYGraphViewController-Info.plist */,
+				CA4F1684184D0CB600AE2475 /* InfoPlist.strings */,
+				CA4F1687184D0CB600AE2475 /* main.m */,
+				CA4F1689184D0CB600AE2475 /* JYGraphViewController-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CA4F16A0184D0CB600AE2475 /* JYGraphViewControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				CA4F16A6184D0CB600AE2475 /* JYGraphViewControllerTests.m */,
+				CA4F16A1184D0CB600AE2475 /* Supporting Files */,
+			);
+			path = JYGraphViewControllerTests;
+			sourceTree = "<group>";
+		};
+		CA4F16A1184D0CB600AE2475 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CA4F16A2184D0CB600AE2475 /* JYGraphViewControllerTests-Info.plist */,
+				CA4F16A3184D0CB600AE2475 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CA4F1677184D0CB600AE2475 /* JYGraphViewController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA4F16AA184D0CB600AE2475 /* Build configuration list for PBXNativeTarget "JYGraphViewController" */;
+			buildPhases = (
+				CA4F1674184D0CB600AE2475 /* Sources */,
+				CA4F1675184D0CB600AE2475 /* Frameworks */,
+				CA4F1676184D0CB600AE2475 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JYGraphViewController;
+			productName = JYGraphViewController;
+			productReference = CA4F1678184D0CB600AE2475 /* JYGraphViewController.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CA4F1698184D0CB600AE2475 /* JYGraphViewControllerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA4F16AD184D0CB600AE2475 /* Build configuration list for PBXNativeTarget "JYGraphViewControllerTests" */;
+			buildPhases = (
+				CA4F1695184D0CB600AE2475 /* Sources */,
+				CA4F1696184D0CB600AE2475 /* Frameworks */,
+				CA4F1697184D0CB600AE2475 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CA4F169F184D0CB600AE2475 /* PBXTargetDependency */,
+			);
+			name = JYGraphViewControllerTests;
+			productName = JYGraphViewControllerTests;
+			productReference = CA4F1699184D0CB600AE2475 /* JYGraphViewControllerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CA4F1670184D0CB600AE2475 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = JYGraph;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "John Yorke";
+				TargetAttributes = {
+					CA4F1698184D0CB600AE2475 = {
+						TestTargetID = CA4F1677184D0CB600AE2475;
+					};
+				};
+			};
+			buildConfigurationList = CA4F1673184D0CB600AE2475 /* Build configuration list for PBXProject "JYGraphViewController" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CA4F166F184D0CB600AE2475;
+			productRefGroup = CA4F1679184D0CB600AE2475 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CA4F1677184D0CB600AE2475 /* JYGraphViewController */,
+				CA4F1698184D0CB600AE2475 /* JYGraphViewControllerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CA4F1676184D0CB600AE2475 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA4F16B7184D0CDB00AE2475 /* JYGraphMenuViewController.xib in Resources */,
+				CA4F1694184D0CB600AE2475 /* Images.xcassets in Resources */,
+				CA4F16B9184D0CDB00AE2475 /* JYGraphViewController.xib in Resources */,
+				CA4F1686184D0CB600AE2475 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA4F1697184D0CB600AE2475 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA4F16A5184D0CB600AE2475 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CA4F1674184D0CB600AE2475 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA4F16B6184D0CDB00AE2475 /* JYGraphMenuViewController.m in Sources */,
+				CA4F168C184D0CB600AE2475 /* JYGraphAppDelegate.m in Sources */,
+				CA4F16B8184D0CDB00AE2475 /* JYGraphViewController.m in Sources */,
+				CA4F1688184D0CB600AE2475 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA4F1695184D0CB600AE2475 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA4F16A7184D0CB600AE2475 /* JYGraphViewControllerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CA4F169F184D0CB600AE2475 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CA4F1677184D0CB600AE2475 /* JYGraphViewController */;
+			targetProxy = CA4F169E184D0CB600AE2475 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CA4F1684184D0CB600AE2475 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CA4F1685184D0CB600AE2475 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CA4F16A3184D0CB600AE2475 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CA4F16A4184D0CB600AE2475 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CA4F16A8184D0CB600AE2475 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CA4F16A9184D0CB600AE2475 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CA4F16AB184D0CB600AE2475 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JYGraphViewController/JYGraphViewController-Prefix.pch";
+				INFOPLIST_FILE = "JYGraphViewController/JYGraphViewController-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CA4F16AC184D0CB600AE2475 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JYGraphViewController/JYGraphViewController-Prefix.pch";
+				INFOPLIST_FILE = "JYGraphViewController/JYGraphViewController-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		CA4F16AE184D0CB600AE2475 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JYGraphViewController.app/JYGraphViewController";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JYGraphViewController/JYGraphViewController-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "JYGraphViewControllerTests/JYGraphViewControllerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		CA4F16AF184D0CB600AE2475 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JYGraphViewController.app/JYGraphViewController";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JYGraphViewController/JYGraphViewController-Prefix.pch";
+				INFOPLIST_FILE = "JYGraphViewControllerTests/JYGraphViewControllerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CA4F1673184D0CB600AE2475 /* Build configuration list for PBXProject "JYGraphViewController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA4F16A8184D0CB600AE2475 /* Debug */,
+				CA4F16A9184D0CB600AE2475 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CA4F16AA184D0CB600AE2475 /* Build configuration list for PBXNativeTarget "JYGraphViewController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA4F16AB184D0CB600AE2475 /* Debug */,
+				CA4F16AC184D0CB600AE2475 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CA4F16AD184D0CB600AE2475 /* Build configuration list for PBXNativeTarget "JYGraphViewControllerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA4F16AE184D0CB600AE2475 /* Debug */,
+				CA4F16AF184D0CB600AE2475 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CA4F1670184D0CB600AE2475 /* Project object */;
+}
