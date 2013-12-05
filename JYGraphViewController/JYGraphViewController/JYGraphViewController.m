@@ -26,19 +26,6 @@
         // Custom initialization
         [self.view addSubview:_scrollView];
         [self.view addSubview:_graphView];
-        
-        NSNumber *one = @10;
-        NSNumber *two = @12;
-        NSNumber *three = @14;
-        NSNumber *four = @12;
-        NSNumber *five = @20;
-        NSNumber *six = @22;
-        NSNumber *seven = @6;
-        NSNumber *eight = @9;
-        
-        _graphData = @[one,two,three,four,five,six,seven,eight];
-        
-        [self plotGraphData];
     }
     return self;
 }
@@ -47,7 +34,27 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    NSNumber *one = @10;
+    NSNumber *two = @12;
+    NSNumber *three = @14;
+    NSNumber *four = @12;
+    NSNumber *five = @13;
+    NSNumber *six = @15;
+    NSNumber *seven = @16;
+    NSNumber *eight = @16;
+    NSNumber *nine = @19;
+    NSNumber *ten = @18;
+    NSNumber *eleven = @21;
+    NSNumber *twelve = @20;
+    NSNumber *thirteen = @19;
+    NSNumber *fourteen = @20;
+    
+    _graphData = @[one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen];
+    
     [_scrollView setContentSize:CGSizeMake(1136, 320)];
+
+    [self plotGraphData];
     
     [_scrollView setScrollEnabled:YES];
 }
@@ -59,7 +66,7 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {    
-    [_graphView setFrame:CGRectMake(self.view.bounds.origin.x, _graphView.bounds.origin.y, 1140, self.view.frame.size.height)];
+    [_graphView setFrame:CGRectMake(self.view.bounds.origin.x, _graphView.bounds.origin.y, 1136, self.view.frame.size.height)];
     
     [_scrollView setFrame:CGRectMake(self.view.bounds.origin.x, _graphView.bounds.origin.y, self.view.bounds.size.width, self.view.frame.size.height)];
         
@@ -68,20 +75,7 @@
 
 - (void) plotGraphData
 {
-//    NSMutableArray *temperatures = [[NSMutableArray alloc] init];
-//    NSMutableArray *timesArray = [[NSMutableArray alloc] init];
     NSMutableArray *pointsCenterLocations = [[NSMutableArray alloc] init];
-        
-//    for (counter = 0; counter < [_graphData count]; counter++) {
-//        
-//        NSNumber *tempNumber = [_graphData objectAtIndex:counter];
-//        
-//        [temperatures addObject:[NSNumber numberWithInt:tempInt]];
-//        
-//        NSString *timeString = [tempDic objectForKey:@"time"];
-//        
-//        [timesArray addObject:timeString];
-//    }
     
     NSArray *arrayToOrder = [NSArray arrayWithArray:_graphData];
     
@@ -95,8 +89,8 @@
     
     for (NSUInteger counter = 1; counter <= [_graphData count]; counter++) {
         
-        CGPoint point = CGPointMake(((_graphView.frame.size.width / 12) * counter) - 22, 
-                                    _graphView.frame.size.height - (([[_graphData objectAtIndex:counter - 1] integerValue] * (_graphView.frame.size.height / (range * 2.5))) - (lowest * (_graphView.frame.size.height / (range * 2.5)))) - 130);
+        CGPoint point = CGPointMake(((1136 / [_graphData count]) * counter) - ([_graphData count] * 3), 
+                                    _graphView.frame.size.height - (([[_graphData objectAtIndex:counter - 1] integerValue] * (_graphView.frame.size.height / (range * 1.3))) - (lowest * (_graphView.frame.size.height / (range * 1.4)))));
         
         UIColor *tempoGreen = [UIColor colorWithRed: 0.71 green: 1 blue: 0.196 alpha: 1];
         
@@ -130,9 +124,9 @@
         
         [tempLabel setCenter:CGPointMake(point.x, point.y - 20)];
         
-        [tempLabel setText:[NSString stringWithFormat:@" %d\u00B0",[[_graphData objectAtIndex:counter - 1] intValue]]];
+        [tempLabel setText:[NSString stringWithFormat:@"%d",[[_graphData objectAtIndex:counter - 1] intValue]]];
         
-        //[self createDateLabelWithXCoord:point andTime:[timesArray objectAtIndex:counter - 1]];
+        [self createDateLabelWithXCoord:point];
     }
     
     UIColor* stroke = [UIColor colorWithRed: 0.71 green: 1 blue: 0.196 alpha: 1];
@@ -145,6 +139,29 @@
     
     
     
+}
+
+- (void) createDateLabelWithXCoord:(CGPoint)xCoord
+{
+    UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0 , 0, (1136 / [_graphData count]) - 4, _graphView.frame.size.height * 2)];
+    
+    timeLabel.textAlignment = NSTextAlignmentCenter;
+    
+    [timeLabel setTextColor:[UIColor whiteColor]];
+    
+    [timeLabel setBackgroundColor:[UIColor colorWithRed:181 green:255 blue:50 alpha:0.07]];
+    
+    [timeLabel setAdjustsFontSizeToFitWidth:YES];
+    
+    [timeLabel setMinimumScaleFactor:0.6];
+    
+    [timeLabel setFont:[UIFont fontWithName:@"Futura-Medium" size:12]];
+    
+    [_graphView addSubview:timeLabel];
+    
+    [timeLabel setCenter:CGPointMake(xCoord.x, 16)];
+    
+    //[timeLabel setText:[dateFormat stringFromDate:date]];
 }
 
 - (NSDictionary *) workOutRangeFromArray: (NSArray *) array
