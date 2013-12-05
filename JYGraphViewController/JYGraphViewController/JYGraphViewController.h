@@ -10,4 +10,6 @@
 
 @interface JYGraphViewController : UIViewController
 
+@property (strong, nonatomic) NSArray *graphData;
+
 @end

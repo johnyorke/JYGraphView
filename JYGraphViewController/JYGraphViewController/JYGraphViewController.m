@@ -13,8 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *graphView;
 
-@property (strong, nonatomic) NSArray *graphData;
-
 @end
 
 @implementation JYGraphViewController
@@ -26,6 +24,17 @@
         // Custom initialization
         [self.view addSubview:_scrollView];
         [self.view addSubview:_graphView];
+        
+        [_scrollView setContentSize:CGSizeMake(1136, 320)];
+        
+        [_scrollView setScrollEnabled:YES];
+        
+        [_graphView setFrame:CGRectMake(self.view.bounds.origin.x, _graphView.bounds.origin.y, 1136, self.view.frame.size.height)];
+        
+        [_scrollView setFrame:CGRectMake(self.view.bounds.origin.x, _graphView.bounds.origin.y, self.view.bounds.size.width, self.view.frame.size.height)];
+        
+        [_scrollView addSubview:_graphView];
+        
     }
     return self;
 }
@@ -34,29 +43,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    NSNumber *one = @10;
-    NSNumber *two = @12;
-    NSNumber *three = @14;
-    NSNumber *four = @12;
-    NSNumber *five = @13;
-    NSNumber *six = @15;
-    NSNumber *seven = @16;
-    NSNumber *eight = @16;
-    NSNumber *nine = @19;
-    NSNumber *ten = @18;
-    NSNumber *eleven = @21;
-    NSNumber *twelve = @20;
-    NSNumber *thirteen = @19;
-    NSNumber *fourteen = @20;
-    
-    _graphData = @[one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen];
-    
-    [_scrollView setContentSize:CGSizeMake(1136, 320)];
-
-    [self plotGraphData];
-    
-    [_scrollView setScrollEnabled:YES];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -66,11 +52,7 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {    
-    [_graphView setFrame:CGRectMake(self.view.bounds.origin.x, _graphView.bounds.origin.y, 1136, self.view.frame.size.height)];
-    
-    [_scrollView setFrame:CGRectMake(self.view.bounds.origin.x, _graphView.bounds.origin.y, self.view.bounds.size.width, self.view.frame.size.height)];
-        
-    [_scrollView addSubview:_graphView];
+    [self plotGraphData];
 }
 
 - (void) plotGraphData
@@ -136,8 +118,6 @@
     [self drawPointswithStrokeColour:stroke 
                              andFill:fill
                            fromArray:pointsCenterLocations];
-    
-    
     
 }
 
