@@ -29,12 +29,9 @@
         
         [_scrollView setScrollEnabled:YES];
         
-        [_graphView setFrame:CGRectMake(self.view.bounds.origin.x, _graphView.bounds.origin.y, 1136, self.view.frame.size.height)];
-        
-        [_scrollView setFrame:CGRectMake(self.view.bounds.origin.x, _graphView.bounds.origin.y, self.view.bounds.size.width, self.view.frame.size.height)];
+        [_scrollView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height)];
         
         [_scrollView addSubview:_graphView];
-        
     }
     return self;
 }
@@ -51,7 +48,11 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated
-{    
+{
+    NSInteger offset = ((1136 / [_graphData count]) / 2);
+    
+    [_graphView setFrame:CGRectMake(0 - offset, 0, 1136, 320)];
+    
     [self plotGraphData];
 }
 
@@ -71,8 +72,10 @@
     
     for (NSUInteger counter = 1; counter <= [_graphData count]; counter++) {
         
-        CGPoint point = CGPointMake(((1136 / [_graphData count]) * counter) - ([_graphData count] * 3), 
-                                    _graphView.frame.size.height - (([[_graphData objectAtIndex:counter - 1] integerValue] * (_graphView.frame.size.height / (range * 1.3))) - (lowest * (_graphView.frame.size.height / (range * 1.4)))));
+        NSInteger xCoord = (1136 / [_graphData count]) * counter;
+        
+        CGPoint point = CGPointMake(xCoord,
+                                    _graphView.frame.size.height - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((_graphView.frame.size.height * 0.9) / range)) - (lowest * ((_graphView.frame.size.height * 0.9) / range ))));
         
         UIColor *tempoGreen = [UIColor colorWithRed: 0.71 green: 1 blue: 0.196 alpha: 1];
         
@@ -139,7 +142,7 @@
     
     [_graphView addSubview:timeLabel];
     
-    [timeLabel setCenter:CGPointMake(xCoord.x, 16)];
+    [timeLabel setCenter:CGPointMake(xCoord.x,0)];
     
     //[timeLabel setText:[dateFormat stringFromDate:date]];
 }

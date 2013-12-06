@@ -10,6 +10,7 @@
 #import "JYGraphViewController.h"
 
 @interface JYGraphMenuViewController ()
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *fieldOne;
 @property (weak, nonatomic) IBOutlet UITextField *fieldTwo;
 @property (weak, nonatomic) IBOutlet UITextField *fieldThree;
@@ -22,6 +23,18 @@
 @property (weak, nonatomic) IBOutlet UITextField *fieldTen;
 @property (weak, nonatomic) IBOutlet UITextField *fieldEleven;
 @property (weak, nonatomic) IBOutlet UITextField *fieldTwelve;
+@property (weak, nonatomic) IBOutlet UITextField *fieldThirteen;
+@property (weak, nonatomic) IBOutlet UITextField *fieldFourteen;
+@property (weak, nonatomic) IBOutlet UITextField *fieldFifteen;
+@property (weak, nonatomic) IBOutlet UITextField *fieldSixteen;
+@property (weak, nonatomic) IBOutlet UITextField *fieldSeventeen;
+@property (weak, nonatomic) IBOutlet UITextField *fieldEighteen;
+@property (weak, nonatomic) IBOutlet UITextField *fieldNineteen;
+@property (weak, nonatomic) IBOutlet UITextField *fieldTwenty;
+@property (weak, nonatomic) IBOutlet UITextField *fieldTwentyOne;
+@property (weak, nonatomic) IBOutlet UITextField *fieldTwentyTwo;
+@property (weak, nonatomic) IBOutlet UITextField *fieldTwentyThree;
+@property (weak, nonatomic) IBOutlet UITextField *fieldTwentyFour;
 
 @end
 
@@ -32,6 +45,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardUp:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDown:) name:UIKeyboardWillHideNotification object:nil];
     }
     return self;
 }
@@ -63,8 +78,7 @@
         [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
         
         JYGraphViewController *graphView = [[JYGraphViewController alloc]
-                                                         initWithNibName:@"JYGraphViewController" bundle:nil];
-        
+                                            initWithNibName:@"JYGraphViewController" bundle:nil];
         
         NSNumber *one = [NSNumber numberWithInteger:[_fieldOne.text integerValue]];
         NSNumber *two = [NSNumber numberWithInteger:[_fieldTwo.text integerValue]];
@@ -78,17 +92,44 @@
         NSNumber *ten = [NSNumber numberWithInteger:[_fieldTen.text integerValue]];
         NSNumber *eleven = [NSNumber numberWithInteger:[_fieldEleven.text integerValue]];
         NSNumber *twelve = [NSNumber numberWithInteger:[_fieldTwelve.text integerValue]];
+        NSNumber *thirteen = [NSNumber numberWithInteger:[_fieldThirteen.text integerValue]];
+        NSNumber *fourteen = [NSNumber numberWithInteger:[_fieldFourteen.text integerValue]];
+        NSNumber *fifteen = [NSNumber numberWithInteger:[_fieldFifteen.text integerValue]];
+        NSNumber *sixteen = [NSNumber numberWithInteger:[_fieldSixteen.text integerValue]];
+        NSNumber *seventeen = [NSNumber numberWithInteger:[_fieldSeventeen.text integerValue]];
+        NSNumber *eighteen = [NSNumber numberWithInteger:[_fieldEighteen.text integerValue]];
+        NSNumber *nineteen = [NSNumber numberWithInteger:[_fieldNineteen.text integerValue]];
+        NSNumber *twenty = [NSNumber numberWithInteger:[_fieldTwenty.text integerValue]];
+        NSNumber *twentyOne = [NSNumber numberWithInteger:[_fieldTwentyOne.text integerValue]];
+        NSNumber *twentyTwo = [NSNumber numberWithInteger:[_fieldTwentyTwo.text integerValue]];
+        NSNumber *twentyThree = [NSNumber numberWithInteger:[_fieldTwentyThree.text integerValue]];
+        NSNumber *twentyFour = [NSNumber numberWithInteger:[_fieldTwentyFour.text integerValue]];
         
-        NSArray *arrayToPass = @[one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve];
+        NSArray *arrayToPass = @[one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,
+                                 fifteen,sixteen,seventeen,eighteen,nineteen,twenty,twentyOne,twentyTwo,twentyThree,twentyFour];
         
         graphView.graphData = arrayToPass;
         
         [self presentViewController:graphView animated:YES completion:nil];
-                
+        
         [[NSNotificationCenter defaultCenter] removeObserver:self];
         
     }
     
+}
+
+- (void) keyboardUp: (NSNotification *) notification
+{
+    NSDictionary* info = [notification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height + kbSize.height);
+}
+
+- (void) keyboardDown: (NSNotification *) notification
+{
+    NSDictionary* info = [notification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height - kbSize.height);
 }
 
 - (BOOL) shouldAutorotate
