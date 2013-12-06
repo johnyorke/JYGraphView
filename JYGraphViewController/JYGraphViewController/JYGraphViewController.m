@@ -9,6 +9,12 @@
 #import "JYGraphViewController.h"
 #import "JYSimpleWeatherGraphPoint.h"
 
+NSUInteger const graphWidth = 1136;
+NSUInteger const graphHeight = 320;
+NSUInteger const gapBetweenBackgroundVerticalBars = 4;
+float const percentageOfScreenHeightToUse = 0.87;
+NSInteger const pointLabelOffsetFromPointCenter = -24;
+
 @interface JYGraphViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *graphView;
@@ -23,18 +29,14 @@
     if (self) {
         // Custom initialization
         [self.view addSubview:_scrollView];
-        [self.view addSubview:_graphView];
-        
-        [_scrollView setContentSize:CGSizeMake(1136, 320)];
-        
-        [_scrollView setScrollEnabled:YES];
-        
+        [_scrollView setContentSize:CGSizeMake(graphWidth, graphHeight)];
         [_scrollView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height)];
-        
         [_scrollView addSubview:_graphView];
     }
     return self;
 }
+
+#pragma mark - viewDid/Will
 
 - (void)viewDidLoad
 {
@@ -49,102 +51,58 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    NSInteger offset = ((1136 / [_graphData count]) / 2);
+    // Set defaults colours if none are set
+    if (!_graphStrokeColour) {
+        _graphStrokeColour = [UIColor colorWithRed:0.71 green: 1 blue: 0.196 alpha: 1];
+    }
+    if (!_graphFillColour) {
+        _graphFillColour = [UIColor colorWithRed: 0.219 green: 0.657 blue: 0 alpha: 1];
+    }
     
-    [_graphView setFrame:CGRectMake(0 - offset, 0, 1136, 320)];
+    NSInteger xCoordOffset = (graphWidth / [_graphData count]) / 2;
+    [_graphView setFrame:CGRectMake(0 - xCoordOffset, 0, graphWidth, graphHeight)];
     
     [self plotGraphData];
 }
+
+#pragma mark - Graph plotting
 
 - (void) plotGraphData
 {
     NSMutableArray *pointsCenterLocations = [[NSMutableArray alloc] init];
     
-    NSArray *arrayToOrder = [NSArray arrayWithArray:_graphData];
-    
-    NSDictionary *graphRange = [self workOutRangeFromArray:arrayToOrder];
-    
+    NSDictionary *graphRange = [self workOutRangeFromArray:_graphData];
     NSInteger range = [[graphRange objectForKey:@"range"] integerValue];
-    
     NSInteger lowest = [[graphRange objectForKey:@"lowest"] integerValue];
     
     CGPoint lastPoint = CGPointMake(0, 0);
     
     for (NSUInteger counter = 1; counter <= [_graphData count]; counter++) {
         
-        NSInteger xCoord = (1136 / [_graphData count]) * counter;
+        NSInteger xCoord = (graphWidth / [_graphData count]) * counter;
         
         CGPoint point = CGPointMake(xCoord,
-                                    _graphView.frame.size.height - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((_graphView.frame.size.height * 0.9) / range)) - (lowest * ((_graphView.frame.size.height * 0.9) / range ))));
+                                    graphHeight - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((graphHeight * percentageOfScreenHeightToUse) / range)) - (lowest * ((graphHeight * percentageOfScreenHeightToUse) / range ))));
         
-        UIColor *tempoGreen = [UIColor colorWithRed: 0.71 green: 1 blue: 0.196 alpha: 1];
+        [self createPointLabelForPoint:point withLabelText:[NSString stringWithFormat:@"%d",[[_graphData objectAtIndex:counter - 1] intValue]]];
+        
+        [self createBackgroundVerticalBarWithXCoord:point];
         
         if (lastPoint.x != 0) {
-            [self drawPointBetweenPoint:lastPoint andPoint:point withColour:tempoGreen];
+            [self drawPointBetweenPoint:lastPoint andPoint:point withColour:_graphStrokeColour];
         }
         
         NSValue *pointValue = [[NSValue alloc] init];
-        
         pointValue = [NSValue valueWithCGPoint:point];
-        
         [pointsCenterLocations addObject:pointValue];
-        
         lastPoint = point;
-        
-        UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(point.x , point.y, 30, 20)];
-        
-        tempLabel.textAlignment = NSTextAlignmentCenter;
-        
-        [tempLabel setTextColor:[UIColor whiteColor]];
-        
-        [tempLabel setBackgroundColor:[UIColor colorWithRed:181 green:255 blue:50 alpha:0.1]];
-        
-        [tempLabel setFont:[UIFont fontWithName:@"Futura-Medium" size:12]];
-        
-        [tempLabel setAdjustsFontSizeToFitWidth:YES];
-        
-        [tempLabel setMinimumScaleFactor:0.6];
-        
-        [_graphView addSubview:tempLabel];
-        
-        [tempLabel setCenter:CGPointMake(point.x, point.y - 20)];
-        
-        [tempLabel setText:[NSString stringWithFormat:@"%d",[[_graphData objectAtIndex:counter - 1] intValue]]];
-        
-        [self createDateLabelWithXCoord:point];
     }
     
-    UIColor* stroke = [UIColor colorWithRed: 0.71 green: 1 blue: 0.196 alpha: 1];
-    UIColor* fill = [UIColor colorWithRed: 0.219 green: 0.657 blue: 0 alpha: 1];
-    
-    // Draw all the point
-    [self drawPointswithStrokeColour:stroke 
-                             andFill:fill
+    // Now draw all the points
+    [self drawPointswithStrokeColour:_graphStrokeColour
+                             andFill:_graphFillColour
                            fromArray:pointsCenterLocations];
     
-}
-
-- (void) createDateLabelWithXCoord:(CGPoint)xCoord
-{
-    UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0 , 0, (1136 / [_graphData count]) - 4, _graphView.frame.size.height * 2)];
-    
-    timeLabel.textAlignment = NSTextAlignmentCenter;
-    
-    [timeLabel setTextColor:[UIColor whiteColor]];
-    
-    [timeLabel setBackgroundColor:[UIColor colorWithRed:181 green:255 blue:50 alpha:0.07]];
-    
-    [timeLabel setAdjustsFontSizeToFitWidth:YES];
-    
-    [timeLabel setMinimumScaleFactor:0.6];
-    
-    [timeLabel setFont:[UIFont fontWithName:@"Futura-Medium" size:12]];
-    
-    [_graphView addSubview:timeLabel];
-    
-    [timeLabel setCenter:CGPointMake(xCoord.x,0)];
-    
-    //[timeLabel setText:[dateFormat stringFromDate:date]];
 }
 
 - (NSDictionary *) workOutRangeFromArray: (NSArray *) array
@@ -163,6 +121,39 @@
                                 [NSNumber numberWithFloat:range], @"range", nil];
     
     return graphRange;
+}
+
+#pragma mark - Drawing methods
+
+- (void) createPointLabelForPoint: (CGPoint) point withLabelText: (NSString *) string
+{
+    UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(point.x , point.y, 30, 20)];
+    tempLabel.textAlignment = NSTextAlignmentCenter;
+    [tempLabel setTextColor:[UIColor whiteColor]];
+    [tempLabel setBackgroundColor:[UIColor colorWithRed:0.07 green:0.07 blue:0.07 alpha:1.0]];
+    [tempLabel setFont:[UIFont fontWithName:@"Futura-Medium" size:12]];
+    [tempLabel setAdjustsFontSizeToFitWidth:YES];
+    [tempLabel setMinimumScaleFactor:0.6];
+    [_graphView addSubview:tempLabel];
+    [tempLabel setCenter:CGPointMake(point.x, point.y + pointLabelOffsetFromPointCenter)];
+    [tempLabel setText:string];
+}
+
+- (void) createBackgroundVerticalBarWithXCoord:(CGPoint)xCoord
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 , 0, (graphWidth / [_graphData count]) - gapBetweenBackgroundVerticalBars, graphHeight * 2)];
+    
+    label.textAlignment = NSTextAlignmentCenter;
+    
+    [label setTextColor:[UIColor whiteColor]];
+    [label setBackgroundColor:[UIColor colorWithRed:181 green:255 blue:50 alpha:0.07]];
+    [label setAdjustsFontSizeToFitWidth:YES];
+    [label setMinimumScaleFactor:0.6];
+    [label setFont:[UIFont fontWithName:@"Futura-Medium" size:12]];
+    
+    [_graphView addSubview:label];
+    
+    [label setCenter:CGPointMake(xCoord.x,0)];
 }
 
 - (void) drawPointBetweenPoint:(CGPoint)origin andPoint:(CGPoint)destination withColour:(UIColor *)colour
@@ -185,7 +176,8 @@
     
     lineShape.path = linePath;
     CGPathRelease(linePath);
-    [_graphView.layer addSublayer:lineShape];
+    //[_graphView.layer addSublayer:lineShape];
+    [_graphView.layer insertSublayer:lineShape atIndex:0];
     
     lineShape = nil;
 }
@@ -211,6 +203,8 @@
         [_graphView addSubview:point];
     }
 }
+
+#pragma mark - Rotation methods
 
 - (void) enableRotation
 {
@@ -239,6 +233,8 @@
 {
     return UIInterfaceOrientationMaskLandscape;
 }
+
+#pragma mark - Memory warning and status bar
 
 - (void)didReceiveMemoryWarning
 {

@@ -109,6 +109,8 @@
                                  fifteen,sixteen,seventeen,eighteen,nineteen,twenty,twentyOne,twentyTwo,twentyThree,twentyFour];
         
         graphView.graphData = arrayToPass;
+        graphView.graphFillColour = [UIColor colorWithRed:0.21 green:0.00 blue:0.40 alpha:1.0];
+        graphView.graphStrokeColour = [UIColor colorWithRed:0.53 green:0.00 blue:0.98 alpha:1.0];
         
         [self presentViewController:graphView animated:YES completion:nil];
         

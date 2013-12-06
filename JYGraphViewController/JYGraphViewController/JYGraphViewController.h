@@ -11,5 +11,7 @@
 @interface JYGraphViewController : UIViewController
 
 @property (strong, nonatomic) NSArray *graphData;
+@property (strong, nonatomic) UIColor *graphStrokeColour;
+@property (strong, nonatomic) UIColor *graphFillColour;
 
 @end
