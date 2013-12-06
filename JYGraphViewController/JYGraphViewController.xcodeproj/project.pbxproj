@@ -24,6 +24,7 @@
 		CA4F16B8184D0CDB00AE2475 /* JYGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4F16B4184D0CDB00AE2475 /* JYGraphViewController.m */; };
 		CA4F16B9184D0CDB00AE2475 /* JYGraphViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA4F16B5184D0CDB00AE2475 /* JYGraphViewController.xib */; };
 		CAD411471850B53D005C28F2 /* JYSimpleWeatherGraphPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD411461850B53D005C28F2 /* JYSimpleWeatherGraphPoint.m */; };
+		DF233F04185272920022C2B0 /* phoneRotationIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = DF233F03185272920022C2B0 /* phoneRotationIcon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		CA4F16B5184D0CDB00AE2475 /* JYGraphViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JYGraphViewController.xib; sourceTree = "<group>"; };
 		CAD411451850B53D005C28F2 /* JYSimpleWeatherGraphPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYSimpleWeatherGraphPoint.h; sourceTree = "<group>"; };
 		CAD411461850B53D005C28F2 /* JYSimpleWeatherGraphPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYSimpleWeatherGraphPoint.m; sourceTree = "<group>"; };
+		DF233F01185250B40022C2B0 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		DF233F03185272920022C2B0 /* phoneRotationIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phoneRotationIcon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +112,7 @@
 		CA4F167A184D0CB600AE2475 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DF233F01185250B40022C2B0 /* CoreMotion.framework */,
 				CA4F167B184D0CB600AE2475 /* Foundation.framework */,
 				CA4F167D184D0CB600AE2475 /* CoreGraphics.framework */,
 				CA4F167F184D0CB600AE2475 /* UIKit.framework */,
@@ -139,6 +143,7 @@
 		CA4F1682184D0CB600AE2475 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DF233F03185272920022C2B0 /* phoneRotationIcon.png */,
 				CA4F1683184D0CB600AE2475 /* JYGraphViewController-Info.plist */,
 				CA4F1684184D0CB600AE2475 /* InfoPlist.strings */,
 				CA4F1687184D0CB600AE2475 /* main.m */,
@@ -245,6 +250,7 @@
 				CA4F16B7184D0CDB00AE2475 /* JYGraphMenuViewController.xib in Resources */,
 				CA4F1694184D0CB600AE2475 /* Images.xcassets in Resources */,
 				CA4F16B9184D0CDB00AE2475 /* JYGraphViewController.xib in Resources */,
+				DF233F04185272920022C2B0 /* phoneRotationIcon.png in Resources */,
 				CA4F1686184D0CB600AE2475 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

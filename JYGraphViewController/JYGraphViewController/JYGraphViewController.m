@@ -84,7 +84,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
         CGPoint point = CGPointMake(xCoord,
                                     graphHeight - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((graphHeight * percentageOfScreenHeightToUse) / range)) - (lowest * ((graphHeight * percentageOfScreenHeightToUse) / range ))));
         
-        [self createPointLabelForPoint:point withLabelText:[NSString stringWithFormat:@"%d",[[_graphData objectAtIndex:counter - 1] intValue]]];
+        [self createPointLabelForPoint:point withLabelText:[NSString stringWithFormat:@"%@",[_graphData objectAtIndex:counter - 1]]];
         
         [self createBackgroundVerticalBarWithXCoord:point];
         
@@ -102,7 +102,6 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     [self drawPointswithStrokeColour:_graphStrokeColour
                              andFill:_graphFillColour
                            fromArray:pointsCenterLocations];
-    
 }
 
 - (NSDictionary *) workOutRangeFromArray: (NSArray *) array
@@ -130,7 +129,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(point.x , point.y, 30, 20)];
     tempLabel.textAlignment = NSTextAlignmentCenter;
     [tempLabel setTextColor:[UIColor whiteColor]];
-    [tempLabel setBackgroundColor:[UIColor colorWithRed:0.07 green:0.07 blue:0.07 alpha:1.0]];
+    [tempLabel setBackgroundColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.5]];
     [tempLabel setFont:[UIFont fontWithName:@"Futura-Medium" size:12]];
     [tempLabel setAdjustsFontSizeToFitWidth:YES];
     [tempLabel setMinimumScaleFactor:0.6];
@@ -176,7 +175,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     
     lineShape.path = linePath;
     CGPathRelease(linePath);
-    //[_graphView.layer addSublayer:lineShape];
+    
     [_graphView.layer insertSublayer:lineShape atIndex:0];
     
     lineShape = nil;
@@ -221,7 +220,6 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
         [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
         [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     }
-    
 }
 
 - (BOOL) shouldAutorotate

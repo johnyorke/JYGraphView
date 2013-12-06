@@ -36,6 +36,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *fieldTwentyThree;
 @property (weak, nonatomic) IBOutlet UITextField *fieldTwentyFour;
 
+@property (weak, nonatomic) IBOutlet UISlider *slider;
+@property (weak, nonatomic) IBOutlet UILabel *textLabel;
+
 @end
 
 @implementation JYGraphMenuViewController
@@ -55,6 +58,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [_slider addTarget:self action:@selector(updateLabel) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -71,6 +75,45 @@
                                                object:nil];
 }
 
+- (NSArray *) createArrayToPass
+{
+    NSNumber *one = [NSNumber numberWithInteger:[_fieldOne.text integerValue]];
+    NSNumber *two = [NSNumber numberWithInteger:[_fieldTwo.text integerValue]];
+    NSNumber *three = [NSNumber numberWithInteger:[_fieldThree.text integerValue]];
+    NSNumber *four = [NSNumber numberWithInteger:[_fieldFour.text integerValue]];
+    NSNumber *five = [NSNumber numberWithInteger:[_fieldFive.text integerValue]];
+    NSNumber *six = [NSNumber numberWithInteger:[_fieldSix.text integerValue]];
+    NSNumber *seven = [NSNumber numberWithInteger:[_fieldSeven.text integerValue]];
+    NSNumber *eight = [NSNumber numberWithInteger:[_fieldEight.text integerValue]];
+    NSNumber *nine = [NSNumber numberWithInteger:[_fieldNine.text integerValue]];
+    NSNumber *ten = [NSNumber numberWithInteger:[_fieldTen.text integerValue]];
+    NSNumber *eleven = [NSNumber numberWithInteger:[_fieldEleven.text integerValue]];
+    NSNumber *twelve = [NSNumber numberWithInteger:[_fieldTwelve.text integerValue]];
+    NSNumber *thirteen = [NSNumber numberWithInteger:[_fieldThirteen.text integerValue]];
+    NSNumber *fourteen = [NSNumber numberWithInteger:[_fieldFourteen.text integerValue]];
+    NSNumber *fifteen = [NSNumber numberWithInteger:[_fieldFifteen.text integerValue]];
+    NSNumber *sixteen = [NSNumber numberWithInteger:[_fieldSixteen.text integerValue]];
+    NSNumber *seventeen = [NSNumber numberWithInteger:[_fieldSeventeen.text integerValue]];
+    NSNumber *eighteen = [NSNumber numberWithInteger:[_fieldEighteen.text integerValue]];
+    NSNumber *nineteen = [NSNumber numberWithInteger:[_fieldNineteen.text integerValue]];
+    NSNumber *twenty = [NSNumber numberWithInteger:[_fieldTwenty.text integerValue]];
+    NSNumber *twentyOne = [NSNumber numberWithInteger:[_fieldTwentyOne.text integerValue]];
+    NSNumber *twentyTwo = [NSNumber numberWithInteger:[_fieldTwentyTwo.text integerValue]];
+    NSNumber *twentyThree = [NSNumber numberWithInteger:[_fieldTwentyThree.text integerValue]];
+    NSNumber *twentyFour = [NSNumber numberWithInteger:[_fieldTwentyFour.text integerValue]];
+    
+    NSArray *arrayOfValues = @[one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,
+                    fifteen,sixteen,seventeen,eighteen,nineteen,twenty,twentyOne,twentyTwo,twentyThree,twentyFour];
+    
+    NSMutableArray *arrayToPass = [NSMutableArray new];
+    
+    for (NSInteger x = 0; x < _slider.value; x++) {
+        [arrayToPass addObject:[arrayOfValues objectAtIndex:x]];
+    }
+    
+    return [NSArray arrayWithArray:arrayToPass];
+}
+
 - (void) didRotate
 {
     [self setNeedsStatusBarAppearanceUpdate];
@@ -80,44 +123,20 @@
         JYGraphViewController *graphView = [[JYGraphViewController alloc]
                                             initWithNibName:@"JYGraphViewController" bundle:nil];
         
-        NSNumber *one = [NSNumber numberWithInteger:[_fieldOne.text integerValue]];
-        NSNumber *two = [NSNumber numberWithInteger:[_fieldTwo.text integerValue]];
-        NSNumber *three = [NSNumber numberWithInteger:[_fieldThree.text integerValue]];
-        NSNumber *four = [NSNumber numberWithInteger:[_fieldFour.text integerValue]];
-        NSNumber *five = [NSNumber numberWithInteger:[_fieldFive.text integerValue]];
-        NSNumber *six = [NSNumber numberWithInteger:[_fieldSix.text integerValue]];
-        NSNumber *seven = [NSNumber numberWithInteger:[_fieldSeven.text integerValue]];
-        NSNumber *eight = [NSNumber numberWithInteger:[_fieldEight.text integerValue]];
-        NSNumber *nine = [NSNumber numberWithInteger:[_fieldNine.text integerValue]];
-        NSNumber *ten = [NSNumber numberWithInteger:[_fieldTen.text integerValue]];
-        NSNumber *eleven = [NSNumber numberWithInteger:[_fieldEleven.text integerValue]];
-        NSNumber *twelve = [NSNumber numberWithInteger:[_fieldTwelve.text integerValue]];
-        NSNumber *thirteen = [NSNumber numberWithInteger:[_fieldThirteen.text integerValue]];
-        NSNumber *fourteen = [NSNumber numberWithInteger:[_fieldFourteen.text integerValue]];
-        NSNumber *fifteen = [NSNumber numberWithInteger:[_fieldFifteen.text integerValue]];
-        NSNumber *sixteen = [NSNumber numberWithInteger:[_fieldSixteen.text integerValue]];
-        NSNumber *seventeen = [NSNumber numberWithInteger:[_fieldSeventeen.text integerValue]];
-        NSNumber *eighteen = [NSNumber numberWithInteger:[_fieldEighteen.text integerValue]];
-        NSNumber *nineteen = [NSNumber numberWithInteger:[_fieldNineteen.text integerValue]];
-        NSNumber *twenty = [NSNumber numberWithInteger:[_fieldTwenty.text integerValue]];
-        NSNumber *twentyOne = [NSNumber numberWithInteger:[_fieldTwentyOne.text integerValue]];
-        NSNumber *twentyTwo = [NSNumber numberWithInteger:[_fieldTwentyTwo.text integerValue]];
-        NSNumber *twentyThree = [NSNumber numberWithInteger:[_fieldTwentyThree.text integerValue]];
-        NSNumber *twentyFour = [NSNumber numberWithInteger:[_fieldTwentyFour.text integerValue]];
-        
-        NSArray *arrayToPass = @[one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,
-                                 fifteen,sixteen,seventeen,eighteen,nineteen,twenty,twentyOne,twentyTwo,twentyThree,twentyFour];
-        
-        graphView.graphData = arrayToPass;
+        graphView.graphData = [self createArrayToPass];
         graphView.graphFillColour = [UIColor colorWithRed:0.21 green:0.00 blue:0.40 alpha:1.0];
         graphView.graphStrokeColour = [UIColor colorWithRed:0.53 green:0.00 blue:0.98 alpha:1.0];
         
         [self presentViewController:graphView animated:YES completion:nil];
         
         [[NSNotificationCenter defaultCenter] removeObserver:self];
-        
     }
     
+}
+
+- (void) updateLabel
+{
+    _textLabel.text = [NSString stringWithFormat:@"%.0f values being passed to graph",_slider.value];
 }
 
 - (void) keyboardUp: (NSNotification *) notification
@@ -141,7 +160,7 @@
 
 - (BOOL) prefersStatusBarHidden
 {
-    return YES;
+    return NO;
 }
 
 
