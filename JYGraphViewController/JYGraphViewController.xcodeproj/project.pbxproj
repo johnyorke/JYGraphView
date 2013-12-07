@@ -218,6 +218,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "John Yorke";
 				TargetAttributes = {
+					CA4F1677184D0CB600AE2475 = {
+						DevelopmentTeam = ZKAN55X625;
+					};
 					CA4F1698184D0CB600AE2475 = {
 						TestTargetID = CA4F1677184D0CB600AE2475;
 					};
@@ -393,10 +396,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JYGraphViewController/JYGraphViewController-Prefix.pch";
 				INFOPLIST_FILE = "JYGraphViewController/JYGraphViewController-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1C1399C1-B265-460A-AF42-A4542B595F01";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -406,10 +412,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JYGraphViewController/JYGraphViewController-Prefix.pch";
 				INFOPLIST_FILE = "JYGraphViewController/JYGraphViewController-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1C1399C1-B265-460A-AF42-A4542B595F01";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -66,17 +66,13 @@
     [self enableRotation];
 }
 
-- (void) enableRotation
-{
-    // Start generating notifications for orientation change
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate)
-                                                 name:UIDeviceOrientationDidChangeNotification
-                                               object:nil];
-}
+#pragma mark - Sample data
 
-- (NSArray *) createArrayToPass
+- (NSArray *) createArrayToPassToGraph
 {
+    // For test purposes only, set the values in the text fields 
+    // and pass them to the graph
+    
     NSNumber *one = [NSNumber numberWithInteger:[_fieldOne.text integerValue]];
     NSNumber *two = [NSNumber numberWithInteger:[_fieldTwo.text integerValue]];
     NSNumber *three = [NSNumber numberWithInteger:[_fieldThree.text integerValue]];
@@ -114,6 +110,8 @@
     return [NSArray arrayWithArray:arrayToPass];
 }
 
+#pragma mark - Rotation methods (required)
+
 - (void) didRotate
 {
     [self setNeedsStatusBarAppearanceUpdate];
@@ -123,16 +121,34 @@
         JYGraphViewController *graphView = [[JYGraphViewController alloc]
                                             initWithNibName:@"JYGraphViewController" bundle:nil];
         
-        graphView.graphData = [self createArrayToPass];
-        graphView.graphFillColour = [UIColor colorWithRed:0.21 green:0.00 blue:0.40 alpha:1.0];
-        graphView.graphStrokeColour = [UIColor colorWithRed:0.53 green:0.00 blue:0.98 alpha:1.0];
+        // Set the data for the graph
+        // Send only an array of number values
+        graphView.graphData = [self createArrayToPassToGraph];
+        
+        // Set the colours for the stroke and fill
+        // If not set, default green values will be used
+        graphView.graphFillColour = [UIColor colorWithRed:0.21f green:0.00f blue:0.40f alpha:1.0f];
+        graphView.graphStrokeColour = [UIColor colorWithRed:0.53f green:0.00f blue:0.98f alpha:1.0f];
         
         [self presentViewController:graphView animated:YES completion:nil];
-        
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
-    
 }
+
+- (void) enableRotation
+{
+    // Start generating notifications for orientation change
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil];
+}
+
+- (BOOL) shouldAutorotate
+{
+    return NO;
+}
+
+#pragma mark - Label and notifications
 
 - (void) updateLabel
 {
@@ -152,17 +168,6 @@
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height - kbSize.height);
 }
-
-- (BOOL) shouldAutorotate
-{
-    return NO;
-}
-
-- (BOOL) prefersStatusBarHidden
-{
-    return NO;
-}
-
 
 - (void)didReceiveMemoryWarning
 {

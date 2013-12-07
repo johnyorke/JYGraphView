@@ -53,10 +53,10 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
 {
     // Set defaults colours if none are set
     if (!_graphStrokeColour) {
-        _graphStrokeColour = [UIColor colorWithRed:0.71 green: 1 blue: 0.196 alpha: 1];
+        _graphStrokeColour = [UIColor colorWithRed:0.71f green: 1.0f blue: 0.196f alpha: 1.0f];
     }
     if (!_graphFillColour) {
-        _graphFillColour = [UIColor colorWithRed: 0.219 green: 0.657 blue: 0 alpha: 1];
+        _graphFillColour = [UIColor colorWithRed: 0.219f green: 0.657f blue: 0 alpha: 1.0f];
     }
     
     NSInteger xCoordOffset = (graphWidth / [_graphData count]) / 2;
@@ -129,7 +129,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(point.x , point.y, 30, 20)];
     tempLabel.textAlignment = NSTextAlignmentCenter;
     [tempLabel setTextColor:[UIColor whiteColor]];
-    [tempLabel setBackgroundColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.5]];
+    [tempLabel setBackgroundColor:[UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.5f]];
     [tempLabel setFont:[UIFont fontWithName:@"Futura-Medium" size:12]];
     [tempLabel setAdjustsFontSizeToFitWidth:YES];
     [tempLabel setMinimumScaleFactor:0.6];
@@ -145,7 +145,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     label.textAlignment = NSTextAlignmentCenter;
     
     [label setTextColor:[UIColor whiteColor]];
-    [label setBackgroundColor:[UIColor colorWithRed:181 green:255 blue:50 alpha:0.07]];
+    [label setBackgroundColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.08f]];
     [label setAdjustsFontSizeToFitWidth:YES];
     [label setMinimumScaleFactor:0.6];
     [label setFont:[UIFont fontWithName:@"Futura-Medium" size:12]];
