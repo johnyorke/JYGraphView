@@ -67,7 +67,7 @@ It's not pretty, but it works. If anyone wants to suggest a better way or improv
 
 # Thanks
 
-First of all I would be thrilled if someone used this in their project and let me know about it. Secondly, I would be equally thrilled if someone gets in touch and tells me everything I did wrong or suggests other ways to improve JYGraphViewController. You can (email me [hello@johnyorke.me](mailto:hello@johnyorke.me)) or get in touch on Twitter @johnyorke
+First of all I would be thrilled if someone used this in their project and let me know about it. Secondly, I would be equally thrilled if someone gets in touch and tells me everything I did wrong or suggests other ways to improve JYGraphViewController. You can (email me [hello@johnyorke.me](mailto:hello@johnyorke.me)) or get in touch on Twitter [@johnyorke](http://www.twitter.com/johnyorke)
 
 # License
 
