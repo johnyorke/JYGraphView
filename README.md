@@ -10,6 +10,8 @@ JYGraphViewController is a slightly adapted version of the graph that appears in
 
 # Implementation
 
+The original implementation was finished about 6 months ago and had a lot of hard-coded values based on the nature of the data it was presenting (always 24 values and not a huge range between the smallest and largest). I've done my best to rename the methods and variables so that they make sense to anybody implementing this. 
+
 If you wish to have it presented when the device is turned landscape, add the presenting view as an observer to UIDeviceOrientationDidChangeNotification with a selector such as _didRotate_. When the device is turned into landscapeLeft or landscapeRight...
 
 ```obj-c
@@ -54,8 +56,6 @@ If you don't set these properties then two shades of green will be used instead.
 If you want to go a bit further with customisation then go ahead and dig around in JYGraphViewController.m. I apologise in advance for the messiness. Good luck.
 
 # What the graph controller actually does
-
-The original implementation was done in a rush and also had a lot of hard-coded values based on the nature of the data it was presenting (always 24 values and not a huge range between the smallest and largest). I've done my best to name methods so that they make sense, which they kind-of do (to me anyway). 
 
 The graph takes your numbers, works out the range, translates them into coordinates, then draws the elements: 
 * background bar (which is actually a label) 
