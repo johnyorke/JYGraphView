@@ -103,7 +103,7 @@
     
     NSMutableArray *arrayToPass = [NSMutableArray new];
     
-    for (NSInteger x = 0; x < _slider.value; x++) {
+    for (NSInteger x = 0; x < _slider.value - 1; x++) {
         [arrayToPass addObject:[arrayOfValues objectAtIndex:x]];
     }
     
@@ -152,7 +152,7 @@
 
 - (void) updateLabel
 {
-    _textLabel.text = [NSString stringWithFormat:@"%.0f values being passed to graph",_slider.value];
+    _textLabel.text = [NSString stringWithFormat:@"%ld values being passed to graph",(long)_slider.value];
 }
 
 - (void) keyboardUp: (NSNotification *) notification

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 John Yorke. All rights reserved.
 //
 
-#import "JYSimpleWeatherGraphPoint.h"
+#import "JYGraphPoint.h"
 
-@implementation JYSimpleWeatherGraphPoint
+@implementation JYGraphPoint
 
 @synthesize strokeColour, fillColour;
 

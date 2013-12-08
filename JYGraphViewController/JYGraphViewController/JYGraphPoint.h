@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JYSimpleWeatherGraphPoint : UIView
+@interface JYGraphPoint : UIView
 {
     UIColor *strokeColour;
     UIColor *fillColour;

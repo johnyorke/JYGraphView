@@ -7,7 +7,7 @@
 //
 
 #import "JYGraphViewController.h"
-#import "JYSimpleWeatherGraphPoint.h"
+#import "JYGraphPoint.h"
 
 NSUInteger const graphWidth = 1136;
 NSUInteger const graphHeight = 320;
@@ -190,7 +190,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     for (int i = 0; i < [pointCenterLocations count]; i++) {
         CGRect pointRect = CGRectMake(0, 0, 20, 20);
         
-        JYSimpleWeatherGraphPoint *point = [[JYSimpleWeatherGraphPoint alloc] initWithFrame:pointRect];
+        JYGraphPoint *point = [[JYGraphPoint alloc] initWithFrame:pointRect];
         
         [point setStrokeColour:stroke];
         [point setFillColour:fill];
