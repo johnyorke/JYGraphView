@@ -10,7 +10,7 @@ JYGraphViewController is a slightly adapted version of the graph that appears in
 
 # Implementation
 
-The original implementation was finished about 6 months ago and had a lot of hard-coded values based on the nature of the data it was presenting (always 24 values and not a huge range between the smallest and largest). I've done my best to rename the methods and variables so that they make sense to anybody implementing this. 
+The original implementation was finished about 6 months ago and had a lot of hard-coded values based on the nature of the data it was presenting (always 24 values and not a huge range between the smallest and largest). I've completely reworked the class in order to make it more open-ended and flexible. I've done my best to rename the methods and variables so that they make sense to anybody implementing this. 
 
 If you wish to have it presented when the device is turned landscape, add the presenting view as an observer to UIDeviceOrientationDidChangeNotification with a selector such as _didRotate_. When the device is turned into landscapeLeft or landscapeRight...
 
@@ -42,12 +42,10 @@ If you wish to customise the look of the graph a bit, you can set the graphStrok
 ```obj-c
 - (void) didRotate
 {
-
 ...
 graphView.graphFillColour = [UIColor colorWithRed:0.21f green:0.00f blue:0.40f alpha:1.0f];
 graphView.graphStrokeColour = [UIColor colorWithRed:0.53f green:0.00f blue:0.98f alpha:1.0f];
 ...
-
 }
 ```
 
@@ -61,13 +59,27 @@ The graph takes your numbers, works out the range, translates them into coordina
 * background bar (which is actually a label) 
 * the line joining the points
 * the label above each point 
-* and finally the points
+* and finally, the points
 
-It's not pretty, but it works. If anyone wants to suggest a better way or improve my code then please go ahead, I just ask that you let me know so I can learn too.
+# Possible use case
+
+1. Use the M7 chip on the iPhone 5s to show step counter data for the last 7/10/30 days
+2. Link it to your app sales and show the trend for the last 30 days/12 months
+3. Use it in your weather app to show predicted temperature for the next 24 hours/7 days
+4. Twitter app could show the number of followers you've gained/lost over last 90 days
+5. Plot open issues/resolved per day in your project planning application
+
+# Known issues
+
+1. Currently no checks to see if the data coming through is a number
+2. There is a small amount of empty space over to the right of the graph
+3. Transparency of the line between points
 
 # Thanks
 
-First of all I would be thrilled if someone used this in their project and let me know about it. Secondly, I would be equally thrilled if someone gets in touch and tells me everything I did wrong or suggests other ways to improve JYGraphViewController. You can (email me [hello@johnyorke.me](mailto:hello@johnyorke.me)) or get in touch on Twitter [@johnyorke](http://www.twitter.com/johnyorke)
+First of all I would be thrilled if someone used this in their project and let me know about it. Secondly, I would be equally thrilled if someone gets in touch with ways in which to improve JYGraphViewController. 
+
+You can (email me [hello@johnyorke.me](mailto:hello@johnyorke.me)) or get in touch on Twitter [@johnyorke](http://www.twitter.com/johnyorke)
 
 # License
 
