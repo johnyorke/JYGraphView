@@ -63,6 +63,8 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     [self enableRotation];
 }
 
@@ -152,7 +154,7 @@
 
 - (void) updateLabel
 {
-    _textLabel.text = [NSString stringWithFormat:@"%ld values being passed to graph",(long)_slider.value];
+    _textLabel.text = [NSString stringWithFormat:@"%ld values being passed to graph. Rotate to display.",(long)_slider.value];
 }
 
 - (void) keyboardUp: (NSNotification *) notification

@@ -73,7 +73,6 @@ The graph takes your numbers, works out the range, translates them into coordina
 
 1. Currently no checks to see if the data coming through is a number
 2. There is a small amount of empty space over to the right of the graph
-3. Transparency of the line between points
 
 # Thanks
 

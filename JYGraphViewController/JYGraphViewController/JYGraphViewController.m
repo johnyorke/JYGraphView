@@ -46,11 +46,15 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
 
 - (void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     [self enableRotation];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     // Set defaults colours if none are set
     if (!_graphStrokeColour) {
         _graphStrokeColour = [UIColor colorWithRed:0.71f green: 1.0f blue: 0.196f alpha: 1.0f];
@@ -84,12 +88,12 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
         CGPoint point = CGPointMake(xCoord,
                                     graphHeight - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((graphHeight * percentageOfScreenHeightToUse) / range)) - (lowest * ((graphHeight * percentageOfScreenHeightToUse) / range ))));
         
-        [self createPointLabelForPoint:point withLabelText:[NSString stringWithFormat:@"%@",[_graphData objectAtIndex:counter - 1]]];
-        
         [self createBackgroundVerticalBarWithXCoord:point];
         
+        [self createPointLabelForPoint:point withLabelText:[NSString stringWithFormat:@"%@",[_graphData objectAtIndex:counter - 1]]];
+                
         if (lastPoint.x != 0) {
-            [self drawPointBetweenPoint:lastPoint andPoint:point withColour:_graphStrokeColour];
+            [self drawLineBetweenPoint:lastPoint andPoint:point withColour:_graphStrokeColour];
         }
         
         NSValue *pointValue = [[NSValue alloc] init];
@@ -145,7 +149,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     label.textAlignment = NSTextAlignmentCenter;
     
     [label setTextColor:[UIColor whiteColor]];
-    [label setBackgroundColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.08f]];
+    [label setBackgroundColor:[UIColor colorWithRed:0.05f green:0.05f blue:0.05f alpha:1.0f]];
     [label setAdjustsFontSizeToFitWidth:YES];
     [label setMinimumScaleFactor:0.6];
     [label setFont:[UIFont fontWithName:@"Futura-Medium" size:12]];
@@ -155,7 +159,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     [label setCenter:CGPointMake(xCoord.x,0)];
 }
 
-- (void) drawPointBetweenPoint:(CGPoint)origin andPoint:(CGPoint)destination withColour:(UIColor *)colour
+- (void) drawLineBetweenPoint:(CGPoint)origin andPoint:(CGPoint)destination withColour:(UIColor *)colour
 {
     CAShapeLayer *lineShape = nil;
     CGMutablePathRef linePath = nil;
@@ -176,7 +180,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     lineShape.path = linePath;
     CGPathRelease(linePath);
     
-    [_graphView.layer insertSublayer:lineShape atIndex:0];
+    [_graphView.layer insertSublayer:lineShape atIndex:100];
     
     lineShape = nil;
 }
