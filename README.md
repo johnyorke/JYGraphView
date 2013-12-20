@@ -10,6 +10,13 @@ JYGraphViewController is a slightly adapted version of the graph that appears in
 
 # Implementation
 
+Grab:
+
+* JYGraphViewController.h
+* JYGraphViewController.m
+* JYGraphPoint.h
+* JYGraphPoint.m
+
 The original implementation was finished about 6 months ago and had a lot of hard-coded values based on the nature of the data it was presenting (always 24 values and not a huge range between the smallest and largest). I've completely reworked the class in order to make it more open-ended and flexible. I've done my best to rename the methods and variables so that they make sense to anybody implementing this. 
 
 If you wish to have it presented when the device is turned landscape, add the presenting view as an observer to UIDeviceOrientationDidChangeNotification with a selector such as _didRotate_. When the device is turned into landscapeLeft or landscapeRight...
