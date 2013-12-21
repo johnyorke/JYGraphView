@@ -12,7 +12,7 @@
 NSUInteger const graphWidth = 1136;
 NSUInteger const graphHeight = 320;
 NSUInteger const gapBetweenBackgroundVerticalBars = 4;
-float const percentageOfScreenHeightToUse = 0.87;
+float const percentageOfScreenHeightToUse = 0.8f;
 NSInteger const pointLabelOffsetFromPointCenter = -24;
 
 @interface JYGraphViewController ()
@@ -88,7 +88,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
         CGPoint point = CGPointMake(xCoord,
                                     graphHeight - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((graphHeight * percentageOfScreenHeightToUse) / range)) - (lowest * ((graphHeight * percentageOfScreenHeightToUse) / range ))));
         
-        [self createBackgroundVerticalBarWithXCoord:point];
+        [self createBackgroundVerticalBarWithXCoord:point withXAxisLabelIndex:counter-1];
         
         [self createPointLabelForPoint:point withLabelText:[NSString stringWithFormat:@"%@",[_graphData objectAtIndex:counter - 1]]];
                 
@@ -142,7 +142,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     [tempLabel setText:string];
 }
 
-- (void) createBackgroundVerticalBarWithXCoord:(CGPoint)xCoord
+- (void) createBackgroundVerticalBarWithXCoord:(CGPoint)xCoord withXAxisLabelIndex:(NSInteger)indexNumber
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 , 0, (graphWidth / [_graphData count]) - gapBetweenBackgroundVerticalBars, graphHeight * 2)];
     
@@ -154,9 +154,13 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     [label setMinimumScaleFactor:0.6];
     [label setFont:[UIFont fontWithName:@"Futura-Medium" size:12]];
     
+    if (self.graphXAxisLabels) {
+        label.text = [NSString stringWithFormat:@"%@",[self.graphXAxisLabels objectAtIndex:indexNumber]];
+    }
+    
     [_graphView addSubview:label];
     
-    [label setCenter:CGPointMake(xCoord.x,0)];
+    [label setCenter:CGPointMake(xCoord.x,16)];
 }
 
 - (void) drawLineBetweenPoint:(CGPoint)origin andPoint:(CGPoint)destination withColour:(UIColor *)colour
@@ -221,8 +225,8 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
 - (void) didRotate
 {
     if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait) {
-        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
         [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

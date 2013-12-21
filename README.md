@@ -14,6 +14,7 @@ Grab:
 
 * JYGraphViewController.h
 * JYGraphViewController.m
+* JYGraphViewController.xib
 * JYGraphPoint.h
 * JYGraphPoint.m
 
@@ -32,6 +33,10 @@ JYGraphViewController *graphView = [[JYGraphViewController alloc] initWithNibNam
 // Set the data for the graph
 // Send only an array of number values
 graphView.graphData = [self createArrayOfNumbersToPassToGraph];
+
+// Set the xAxis labels (optional)
+// Can send numbers or strings (it's printed using stringWithFormat:"%@")
+graphView.graphXAxisLabels = [self createXAxisLabelArray];
 
 [self presentViewController:graphView animated:YES completion:nil];
     }

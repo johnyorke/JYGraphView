@@ -58,7 +58,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [_slider addTarget:self action:@selector(updateLabel) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -112,6 +111,23 @@
     return [NSArray arrayWithArray:arrayToPass];
 }
 
+- (NSArray *) createXAxisLabelArray
+{
+    NSMutableArray *mutableArray = [NSMutableArray new];
+    
+    NSInteger sliderValue = (int)_slider.value;
+    
+    NSString *alphabet = @"abcdefghijklmnopqrstuvwxyz";
+    
+    for (int x = 0; x <= sliderValue ; x++) {
+        NSRange range = NSMakeRange(x, 1);
+        NSString *letter = [[alphabet substringWithRange:range] uppercaseString];
+        [mutableArray addObject:letter];
+    }
+    
+    return [NSArray arrayWithArray:mutableArray];
+}
+
 #pragma mark - Rotation methods (required)
 
 - (void) didRotate
@@ -127,12 +143,18 @@
         // Send only an array of number values
         graphView.graphData = [self createArrayToPassToGraph];
         
+        // Set the xAxis labels
+        // Can send numbers or strings (it's printed using stringWithFormat:"%@")
+        graphView.graphXAxisLabels = [self createXAxisLabelArray];
+        
         // Set the colours for the stroke and fill
         // If not set, default green values will be used
         graphView.graphFillColour = [UIColor colorWithRed:0.21f green:0.00f blue:0.40f alpha:1.0f];
         graphView.graphStrokeColour = [UIColor colorWithRed:0.53f green:0.00f blue:0.98f alpha:1.0f];
         
-        [self presentViewController:graphView animated:YES completion:nil];
+        if (![self.presentedViewController isBeingPresented]) {
+            [self presentViewController:graphView animated:YES completion:nil];
+        }
     }
 }
 
@@ -151,11 +173,6 @@
 }
 
 #pragma mark - Label and notifications
-
-- (void) updateLabel
-{
-    _textLabel.text = [NSString stringWithFormat:@"%ld values being passed to graph. Rotate to display.",(long)_slider.value];
-}
 
 - (void) keyboardUp: (NSNotification *) notification
 {
