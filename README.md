@@ -43,6 +43,15 @@ graphView.graphXAxisLabels = [self createXAxisLabelArray];
 }
 ```
 
+You might also wish to switch off rotation for the presenting view controller using:
+
+```obj-c
+- (BOOL) shouldAutorotate
+{
+    return NO;
+}
+```
+
 By default the graph uses a UIView subclass to draw each point. You can grab the JYGraphPoint files and use them if you wish, or you can use your own graphics/class. If you do that just replace any mention of JYGraphPoint in JYGraphViewController.m with your own solution. 
 
 This is (hopefully) all you need to do! The above will take your array of numbers and divide 1136 points (2 x 4" screens) by your array count. I've tested this up to about 40 numbers, anything more than that and it starts to get a little crowded. If you need to present more than 40 numbers then I suggest you change the _graphWidth_ constant in JYGraphViewController.m to be quite a bit wider.
