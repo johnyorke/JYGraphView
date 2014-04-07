@@ -9,7 +9,6 @@
 #import "JYGraphViewController.h"
 #import "JYGraphPoint.h"
 
-NSUInteger const kDefaultGraphWidth = 1136;
 NSUInteger const kDefaultGraphHeight = 320;
 NSUInteger const gapBetweenBackgroundVerticalBars = 4;
 float const percentageOfScreenHeightToUse = 0.8f;
@@ -28,10 +27,6 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [self.view addSubview:_scrollView];
-        [_scrollView setContentSize:CGSizeMake(kDefaultGraphWidth, kDefaultGraphHeight)];
-        [_scrollView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height)];
-        [_scrollView addSubview:_graphView];
     }
     return self;
 }
@@ -42,13 +37,6 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-}
-
-- (void) viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self enableRotation];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -62,11 +50,26 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     if (!_graphFillColour) {
         _graphFillColour = [UIColor colorWithRed: 0.219f green: 0.657f blue: 0 alpha: 1.0f];
     }
+    if (!self.graphWidth || self.graphWidth < [UIScreen mainScreen].bounds.size.height) {
+        self.graphWidth = [UIScreen mainScreen].bounds.size.height * 2;
+    }
     
-    NSInteger xCoordOffset = (kDefaultGraphWidth / [_graphData count]) / 2;
-    [_graphView setFrame:CGRectMake(0 - xCoordOffset, 0, kDefaultGraphWidth, kDefaultGraphHeight)];
+    NSInteger xCoordOffset = (self.graphWidth / [_graphData count]) / 2;
+    [_graphView setFrame:CGRectMake(0 - xCoordOffset, 0, self.graphWidth, kDefaultGraphHeight)];
+    
+    [self.view addSubview:_scrollView];
+    [_scrollView setContentSize:CGSizeMake(self.graphWidth, kDefaultGraphHeight)];
+    [_scrollView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height)];
+    [_scrollView addSubview:_graphView];
     
     [self plotGraphData];
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self enableRotation];
 }
 
 #pragma mark - Graph plotting
@@ -83,7 +86,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     
     for (NSUInteger counter = 1; counter <= [_graphData count]; counter++) {
         
-        NSInteger xCoord = (kDefaultGraphWidth / [_graphData count]) * counter;
+        NSInteger xCoord = (self.graphWidth / [_graphData count]) * counter;
         
         CGPoint point = CGPointMake(xCoord,
                                     kDefaultGraphHeight - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((kDefaultGraphHeight * percentageOfScreenHeightToUse) / range)) - (lowest * ((kDefaultGraphHeight * percentageOfScreenHeightToUse) / range ))));
@@ -147,7 +150,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
 
 - (void) createBackgroundVerticalBarWithXCoord:(CGPoint)xCoord withXAxisLabelIndex:(NSInteger)indexNumber
 {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 , 0, (kDefaultGraphWidth / [_graphData count]) - gapBetweenBackgroundVerticalBars, kDefaultGraphHeight * 2)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 , 0, (self.graphWidth / [_graphData count]) - gapBetweenBackgroundVerticalBars, kDefaultGraphHeight * 2)];
     
     label.textAlignment = NSTextAlignmentCenter;
     

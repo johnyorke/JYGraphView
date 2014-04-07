@@ -153,7 +153,7 @@
         graphView.graphStrokeColour = [UIColor colorWithRed:0.53 green:0.00 blue:0.98 alpha:1];
         
         //graphView.hideLines = YES;
-        //graphView.graphWidth = 3000;
+        //graphView.graphWidth = [UIScreen mainScreen].bounds.size.height;
         
         if (![self.presentedViewController isBeingPresented]) {
             [self presentViewController:graphView animated:YES completion:nil];
