@@ -44,14 +44,29 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     [super viewWillAppear:animated];
     
     // Set defaults colours if none are set
-    if (!_graphStrokeColour) {
-        _graphStrokeColour = [UIColor colorWithRed:0.71f green: 1.0f blue: 0.196f alpha: 1.0f];
+    if (!_graphStrokeColor) {
+        _graphStrokeColor = [UIColor colorWithRed:0.71f green: 1.0f blue: 0.196f alpha: 1.0f];
     }
-    if (!_graphFillColour) {
-        _graphFillColour = [UIColor colorWithRed: 0.219f green: 0.657f blue: 0 alpha: 1.0f];
+    if (!_graphFillColor) {
+        _graphFillColor = [UIColor colorWithRed: 0.219f green: 0.657f blue: 0 alpha: 1.0f];
     }
     if (!self.graphWidth || self.graphWidth < [UIScreen mainScreen].bounds.size.height) {
         self.graphWidth = [UIScreen mainScreen].bounds.size.height * 2;
+    }
+    if (!self.backgroundColor) {
+        self.backgroundColor = [UIColor blackColor];
+    }
+    if (!self.barColor) {
+        self.barColor = [UIColor colorWithRed:0.05f green:0.05f blue:0.05f alpha:1.0f];
+    }
+    if (!self.labelFont) {
+        self.labelFont = [UIFont fontWithName:@"Futura-Medium" size:12];
+    }
+    if (!self.labelFontColor) {
+        self.labelFontColor = [UIColor whiteColor];
+    }
+    if (!self.labelBackgroundColor) {
+        self.labelBackgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.5f];
     }
     
     NSInteger xCoordOffset = (self.graphWidth / [_graphData count]) / 2;
@@ -61,6 +76,9 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     [_scrollView setContentSize:CGSizeMake(self.graphWidth, kDefaultGraphHeight)];
     [_scrollView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height)];
     [_scrollView addSubview:_graphView];
+    
+    self.graphView.backgroundColor = [UIColor clearColor];
+    self.scrollView.backgroundColor = self.backgroundColor;
     
     [self plotGraphData];
 }
@@ -98,7 +116,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
         // Check it's not the first item
         if (lastPoint.x != 0) {
             if (!self.hideLines) {
-                [self drawLineBetweenPoint:lastPoint andPoint:point withColour:_graphStrokeColour];
+                [self drawLineBetweenPoint:lastPoint andPoint:point withColour:_graphStrokeColor];
             }
         }
         
@@ -109,8 +127,8 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     }
     
     // Now draw all the points
-    [self drawPointswithStrokeColour:_graphStrokeColour
-                             andFill:_graphFillColour
+    [self drawPointswithStrokeColour:_graphStrokeColor
+                             andFill:_graphFillColor
                            fromArray:pointsCenterLocations];
 }
 
@@ -134,13 +152,14 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
 
 #pragma mark - Drawing methods
 
-- (void) createPointLabelForPoint: (CGPoint) point withLabelText: (NSString *) string
+- (void) createPointLabelForPoint:(CGPoint) point 
+                    withLabelText:(NSString *) string
 {
     UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(point.x , point.y, 30, 20)];
     tempLabel.textAlignment = NSTextAlignmentCenter;
-    [tempLabel setTextColor:[UIColor whiteColor]];
-    [tempLabel setBackgroundColor:[UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.5f]];
-    [tempLabel setFont:[UIFont fontWithName:@"Futura-Medium" size:12]];
+    [tempLabel setTextColor:self.labelFontColor];
+    [tempLabel setBackgroundColor:self.labelBackgroundColor];
+    [tempLabel setFont:self.labelFont];
     [tempLabel setAdjustsFontSizeToFitWidth:YES];
     [tempLabel setMinimumScaleFactor:0.6];
     [_graphView addSubview:tempLabel];
@@ -148,17 +167,18 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     [tempLabel setText:string];
 }
 
-- (void) createBackgroundVerticalBarWithXCoord:(CGPoint)xCoord withXAxisLabelIndex:(NSInteger)indexNumber
+- (void) createBackgroundVerticalBarWithXCoord:(CGPoint)xCoord 
+                           withXAxisLabelIndex:(NSInteger)indexNumber
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 , 0, (self.graphWidth / [_graphData count]) - gapBetweenBackgroundVerticalBars, kDefaultGraphHeight * 2)];
     
     label.textAlignment = NSTextAlignmentCenter;
     
-    [label setTextColor:[UIColor whiteColor]];
-    [label setBackgroundColor:[UIColor colorWithRed:0.05f green:0.05f blue:0.05f alpha:1.0f]];
+    [label setTextColor:self.labelFontColor];
+    [label setBackgroundColor:self.barColor];
     [label setAdjustsFontSizeToFitWidth:YES];
     [label setMinimumScaleFactor:0.6];
-    [label setFont:[UIFont fontWithName:@"Futura-Medium" size:12]];
+    [label setFont:self.labelFont];
     [label setNumberOfLines:2];
     
     if (self.graphXAxisLabels) {
@@ -170,7 +190,9 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     [label setCenter:CGPointMake(xCoord.x,16)];
 }
 
-- (void) drawLineBetweenPoint:(CGPoint)origin andPoint:(CGPoint)destination withColour:(UIColor *)colour
+- (void) drawLineBetweenPoint:(CGPoint)origin 
+                     andPoint:(CGPoint)destination 
+                   withColour:(UIColor *)colour
 {
     CAShapeLayer *lineShape = nil;
     CGMutablePathRef linePath = nil;

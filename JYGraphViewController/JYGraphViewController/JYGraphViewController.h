@@ -12,11 +12,14 @@
 
 @property (strong, nonatomic) NSArray *graphData;
 @property (strong, nonatomic) NSArray *graphXAxisLabels;
-@property (strong, nonatomic) UIColor *graphStrokeColour;
-@property (strong, nonatomic) UIColor *graphFillColour;
-
+@property (strong, nonatomic) UIColor *graphStrokeColor;
+@property (strong, nonatomic) UIColor *graphFillColor;
 @property (assign) BOOL hideLines;
-
 @property (assign) NSUInteger graphWidth;
+@property (strong, nonatomic) UIColor *backgroundColor;
+@property (strong, nonatomic) UIColor *barColor;
+@property (strong, nonatomic) UIFont *labelFont;
+@property (strong, nonatomic) UIColor *labelFontColor;
+@property (strong, nonatomic) UIColor *labelBackgroundColor;
 
 @end

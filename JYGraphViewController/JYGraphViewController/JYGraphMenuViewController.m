@@ -149,11 +149,16 @@
         
         // Set the colours for the stroke and fill
         // If not set, default green values will be used
-        graphView.graphFillColour = [UIColor colorWithRed:0.21 green:0.00 blue:0.40 alpha:1];
-        graphView.graphStrokeColour = [UIColor colorWithRed:0.53 green:0.00 blue:0.98 alpha:1];
+        graphView.graphFillColor = [UIColor colorWithRed:0.21 green:0.00 blue:0.40 alpha:1];
+        graphView.graphStrokeColor = [UIColor colorWithRed:0.53 green:0.00 blue:0.98 alpha:1];
         
         //graphView.hideLines = YES;
         //graphView.graphWidth = [UIScreen mainScreen].bounds.size.height;
+        graphView.backgroundColor = [UIColor purpleColor];
+        graphView.barColor = [UIColor greenColor];
+        graphView.labelFont = [UIFont systemFontOfSize:12];
+        graphView.labelFontColor = [UIColor blueColor];
+        graphView.labelBackgroundColor = [UIColor redColor];
         
         if (![self.presentedViewController isBeingPresented]) {
             [self presentViewController:graphView animated:YES completion:nil];
