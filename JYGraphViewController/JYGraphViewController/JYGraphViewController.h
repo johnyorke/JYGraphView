@@ -11,7 +11,7 @@
 @interface JYGraphViewController : UIViewController
 
 @property (strong, nonatomic) NSArray *graphData;
-@property (strong, nonatomic) NSArray *graphXAxisLabels;
+@property (strong, nonatomic) NSArray *graphDataLabels;
 @property (strong, nonatomic) UIColor *graphStrokeColor;
 @property (strong, nonatomic) UIColor *graphFillColor;
 @property (assign) BOOL hideLines;

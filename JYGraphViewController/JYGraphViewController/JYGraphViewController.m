@@ -43,7 +43,31 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
 {
     [super viewWillAppear:animated];
     
-    // Set defaults colours if none are set
+    [self setDefaultValues];
+    
+    [self.view addSubview:_scrollView];
+    [_scrollView setContentSize:CGSizeMake(self.graphWidth, kDefaultGraphHeight)];
+    [_scrollView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height)];
+    [_scrollView addSubview:_graphView];
+    
+    NSInteger xCoordOffset = (self.graphWidth / [_graphData count]) / 2;
+    [_graphView setFrame:CGRectMake(0 - xCoordOffset, 0, self.graphWidth, kDefaultGraphHeight)];
+    
+    self.scrollView.backgroundColor = self.backgroundColor;
+    
+    [self plotGraphData];
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self enableRotation];
+}
+
+- (void)setDefaultValues
+{
+    // Set defaults values/options if none are set
     if (!_graphStrokeColor) {
         _graphStrokeColor = [UIColor colorWithRed:0.71f green: 1.0f blue: 0.196f alpha: 1.0f];
     }
@@ -68,26 +92,6 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     if (!self.labelBackgroundColor) {
         self.labelBackgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.5f];
     }
-    
-    NSInteger xCoordOffset = (self.graphWidth / [_graphData count]) / 2;
-    [_graphView setFrame:CGRectMake(0 - xCoordOffset, 0, self.graphWidth, kDefaultGraphHeight)];
-    
-    [self.view addSubview:_scrollView];
-    [_scrollView setContentSize:CGSizeMake(self.graphWidth, kDefaultGraphHeight)];
-    [_scrollView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height)];
-    [_scrollView addSubview:_graphView];
-    
-    self.graphView.backgroundColor = [UIColor clearColor];
-    self.scrollView.backgroundColor = self.backgroundColor;
-    
-    [self plotGraphData];
-}
-
-- (void) viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self enableRotation];
 }
 
 #pragma mark - Graph plotting
@@ -181,8 +185,8 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     [label setFont:self.labelFont];
     [label setNumberOfLines:2];
     
-    if (self.graphXAxisLabels) {
-        label.text = [NSString stringWithFormat:@"%@",[self.graphXAxisLabels objectAtIndex:indexNumber]];
+    if (self.graphDataLabels) {
+        label.text = [NSString stringWithFormat:@"%@",[self.graphDataLabels objectAtIndex:indexNumber]];
     }
     
     [_graphView addSubview:label];
