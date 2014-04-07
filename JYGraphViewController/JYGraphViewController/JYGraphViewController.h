@@ -15,4 +15,8 @@
 @property (strong, nonatomic) UIColor *graphStrokeColour;
 @property (strong, nonatomic) UIColor *graphFillColour;
 
+@property (assign) BOOL hideLines;
+
+@property (assign) NSUInteger graphWidth;
+
 @end

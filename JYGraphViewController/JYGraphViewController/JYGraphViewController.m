@@ -9,8 +9,8 @@
 #import "JYGraphViewController.h"
 #import "JYGraphPoint.h"
 
-NSUInteger const graphWidth = 1136;
-NSUInteger const graphHeight = 320;
+NSUInteger const kDefaultGraphWidth = 1136;
+NSUInteger const kDefaultGraphHeight = 320;
 NSUInteger const gapBetweenBackgroundVerticalBars = 4;
 float const percentageOfScreenHeightToUse = 0.8f;
 NSInteger const pointLabelOffsetFromPointCenter = -24;
@@ -29,7 +29,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     if (self) {
         // Custom initialization
         [self.view addSubview:_scrollView];
-        [_scrollView setContentSize:CGSizeMake(graphWidth, graphHeight)];
+        [_scrollView setContentSize:CGSizeMake(kDefaultGraphWidth, kDefaultGraphHeight)];
         [_scrollView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height)];
         [_scrollView addSubview:_graphView];
     }
@@ -63,8 +63,8 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
         _graphFillColour = [UIColor colorWithRed: 0.219f green: 0.657f blue: 0 alpha: 1.0f];
     }
     
-    NSInteger xCoordOffset = (graphWidth / [_graphData count]) / 2;
-    [_graphView setFrame:CGRectMake(0 - xCoordOffset, 0, graphWidth, graphHeight)];
+    NSInteger xCoordOffset = (kDefaultGraphWidth / [_graphData count]) / 2;
+    [_graphView setFrame:CGRectMake(0 - xCoordOffset, 0, kDefaultGraphWidth, kDefaultGraphHeight)];
     
     [self plotGraphData];
 }
@@ -83,17 +83,20 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     
     for (NSUInteger counter = 1; counter <= [_graphData count]; counter++) {
         
-        NSInteger xCoord = (graphWidth / [_graphData count]) * counter;
+        NSInteger xCoord = (kDefaultGraphWidth / [_graphData count]) * counter;
         
         CGPoint point = CGPointMake(xCoord,
-                                    graphHeight - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((graphHeight * percentageOfScreenHeightToUse) / range)) - (lowest * ((graphHeight * percentageOfScreenHeightToUse) / range ))));
+                                    kDefaultGraphHeight - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((kDefaultGraphHeight * percentageOfScreenHeightToUse) / range)) - (lowest * ((kDefaultGraphHeight * percentageOfScreenHeightToUse) / range ))));
         
         [self createBackgroundVerticalBarWithXCoord:point withXAxisLabelIndex:counter-1];
         
         [self createPointLabelForPoint:point withLabelText:[NSString stringWithFormat:@"%@",[_graphData objectAtIndex:counter - 1]]];
-                
+        
+        // Check it's not the first item
         if (lastPoint.x != 0) {
-            [self drawLineBetweenPoint:lastPoint andPoint:point withColour:_graphStrokeColour];
+            if (!self.hideLines) {
+                [self drawLineBetweenPoint:lastPoint andPoint:point withColour:_graphStrokeColour];
+            }
         }
         
         NSValue *pointValue = [[NSValue alloc] init];
@@ -144,7 +147,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
 
 - (void) createBackgroundVerticalBarWithXCoord:(CGPoint)xCoord withXAxisLabelIndex:(NSInteger)indexNumber
 {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 , 0, (graphWidth / [_graphData count]) - gapBetweenBackgroundVerticalBars, graphHeight * 2)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 , 0, (kDefaultGraphWidth / [_graphData count]) - gapBetweenBackgroundVerticalBars, kDefaultGraphHeight * 2)];
     
     label.textAlignment = NSTextAlignmentCenter;
     
@@ -153,6 +156,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     [label setAdjustsFontSizeToFitWidth:YES];
     [label setMinimumScaleFactor:0.6];
     [label setFont:[UIFont fontWithName:@"Futura-Medium" size:12]];
+    [label setNumberOfLines:2];
     
     if (self.graphXAxisLabels) {
         label.text = [NSString stringWithFormat:@"%@",[self.graphXAxisLabels objectAtIndex:indexNumber]];
@@ -184,7 +188,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     lineShape.path = linePath;
     CGPathRelease(linePath);
     
-    [_graphView.layer insertSublayer:lineShape atIndex:100];
+    [_graphView.layer addSublayer:lineShape];
     
     lineShape = nil;
 }
