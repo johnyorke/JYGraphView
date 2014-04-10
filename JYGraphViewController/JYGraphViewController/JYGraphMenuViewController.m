@@ -60,7 +60,7 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-- (void) viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
@@ -69,49 +69,31 @@
 
 #pragma mark - Sample data
 
-- (NSArray *) createArrayToPassToGraph
+- (NSArray *)createArrayToPassToGraph
 {
-    // For test purposes only, set the values in the text fields 
+    // For test purposes only, set the values in the text fields
     // and pass them to the graph
     
-    NSNumber *one = [NSNumber numberWithInteger:[_fieldOne.text integerValue]];
-    NSNumber *two = [NSNumber numberWithInteger:[_fieldTwo.text integerValue]];
-    NSNumber *three = [NSNumber numberWithInteger:[_fieldThree.text integerValue]];
-    NSNumber *four = [NSNumber numberWithInteger:[_fieldFour.text integerValue]];
-    NSNumber *five = [NSNumber numberWithInteger:[_fieldFive.text integerValue]];
-    NSNumber *six = [NSNumber numberWithInteger:[_fieldSix.text integerValue]];
-    NSNumber *seven = [NSNumber numberWithInteger:[_fieldSeven.text integerValue]];
-    NSNumber *eight = [NSNumber numberWithInteger:[_fieldEight.text integerValue]];
-    NSNumber *nine = [NSNumber numberWithInteger:[_fieldNine.text integerValue]];
-    NSNumber *ten = [NSNumber numberWithInteger:[_fieldTen.text integerValue]];
-    NSNumber *eleven = [NSNumber numberWithInteger:[_fieldEleven.text integerValue]];
-    NSNumber *twelve = [NSNumber numberWithInteger:[_fieldTwelve.text integerValue]];
-    NSNumber *thirteen = [NSNumber numberWithInteger:[_fieldThirteen.text integerValue]];
-    NSNumber *fourteen = [NSNumber numberWithInteger:[_fieldFourteen.text integerValue]];
-    NSNumber *fifteen = [NSNumber numberWithInteger:[_fieldFifteen.text integerValue]];
-    NSNumber *sixteen = [NSNumber numberWithInteger:[_fieldSixteen.text integerValue]];
-    NSNumber *seventeen = [NSNumber numberWithInteger:[_fieldSeventeen.text integerValue]];
-    NSNumber *eighteen = [NSNumber numberWithInteger:[_fieldEighteen.text integerValue]];
-    NSNumber *nineteen = [NSNumber numberWithInteger:[_fieldNineteen.text integerValue]];
-    NSNumber *twenty = [NSNumber numberWithInteger:[_fieldTwenty.text integerValue]];
-    NSNumber *twentyOne = [NSNumber numberWithInteger:[_fieldTwentyOne.text integerValue]];
-    NSNumber *twentyTwo = [NSNumber numberWithInteger:[_fieldTwentyTwo.text integerValue]];
-    NSNumber *twentyThree = [NSNumber numberWithInteger:[_fieldTwentyThree.text integerValue]];
-    NSNumber *twentyFour = [NSNumber numberWithInteger:[_fieldTwentyFour.text integerValue]];
-    
-    NSArray *arrayOfValues = @[one,two,three,four,five,six,seven,eight,nine,ten,eleven,twelve,thirteen,fourteen,
-                    fifteen,sixteen,seventeen,eighteen,nineteen,twenty,twentyOne,twentyTwo,twentyThree,twentyFour];
+    NSArray *arrayOfFields = @[self.fieldOne,self.fieldTwo,self.fieldThree,self.fieldFour,self.fieldFive,self.fieldSix,self.fieldSeven,self.fieldEight,self.fieldNine,self.fieldTen,self.fieldEleven,self.fieldTwelve,self.fieldThirteen,self.fieldFourteen,self.fieldFifteen,self.fieldSixteen,self.fieldSeventeen,self.fieldEighteen,self.fieldNineteen,self.fieldTwenty,self.fieldTwentyOne,self.fieldTwentyTwo,self.fieldTwentyThree,self.fieldTwentyFour];
     
     NSMutableArray *arrayToPass = [NSMutableArray new];
     
     for (NSInteger x = 0; x < _slider.value - 1; x++) {
-        [arrayToPass addObject:[arrayOfValues objectAtIndex:x]];
+        UITextField *textField = [arrayOfFields objectAtIndex:x];
+        NSRange range = [textField.text rangeOfString:@"."];
+        if (range.location == NSNotFound) {
+            NSNumber *num = [NSNumber numberWithInteger:[textField.text integerValue]];
+            [arrayToPass addObject:num];
+        } else {
+            NSNumber *num = [NSNumber numberWithFloat:[textField.text floatValue]];
+            [arrayToPass addObject:num];
+        }
     }
     
     return [NSArray arrayWithArray:arrayToPass];
 }
 
-- (NSArray *) createXAxisLabelArray
+- (NSArray *)createXAxisLabelArray
 {
     NSMutableArray *mutableArray = [NSMutableArray new];
     
@@ -130,7 +112,7 @@
 
 #pragma mark - Rotation methods (required)
 
-- (void) didRotate
+- (void)didRotate
 {
     [self setNeedsStatusBarAppearanceUpdate];
     if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft ||
@@ -148,15 +130,15 @@
         graphView.graphDataLabels = [self createXAxisLabelArray];
         
         // Customisation options
-//        graphView.graphFillColor = [UIColor colorWithRed:0.94 green:0.32 blue:0.59 alpha:1.0];
-//        graphView.graphStrokeColor = [UIColor darkGrayColor];
-//        graphView.hideLines = YES;
-//        graphView.graphWidth = 720;
-//        graphView.backgroundColor = [UIColor grayColor];
-//        graphView.barColor = [UIColor lightGrayColor];
-//        graphView.labelFont = [UIFont fontWithName:@"AvenieNextCondensed-Regular" size:12];
-//        graphView.labelFontColor = [UIColor whiteColor];
-//        graphView.labelBackgroundColor = [UIColor grayColor];
+        //        graphView.graphFillColor = [UIColor colorWithRed:0.94 green:0.32 blue:0.59 alpha:1.0];
+        //        graphView.graphStrokeColor = [UIColor darkGrayColor];
+        //        graphView.hideLines = YES;
+        //        graphView.graphWidth = 720;
+        //        graphView.backgroundColor = [UIColor grayColor];
+        //        graphView.barColor = [UIColor lightGrayColor];
+        //        graphView.labelFont = [UIFont fontWithName:@"AvenieNextCondensed-Regular" size:12];
+        //        graphView.labelFontColor = [UIColor whiteColor];
+        //        graphView.labelBackgroundColor = [UIColor grayColor];
         
         if (![self.presentedViewController isBeingPresented]) {
             [self presentViewController:graphView animated:YES completion:nil];
@@ -164,7 +146,7 @@
     }
 }
 
-- (void) enableRotation
+- (void)enableRotation
 {
     // Start generating notifications for orientation change
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
@@ -173,21 +155,21 @@
                                                object:nil];
 }
 
-- (BOOL) shouldAutorotate
+- (BOOL)shouldAutorotate
 {
     return NO;
 }
 
 #pragma mark - Label and notifications
 
-- (void) keyboardUp: (NSNotification *) notification
+- (void)keyboardUp:(NSNotification *)notification
 {
     NSDictionary* info = [notification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height + kbSize.height);
 }
 
-- (void) keyboardDown: (NSNotification *) notification
+- (void)keyboardDown:(NSNotification *)notification
 {
     NSDictionary* info = [notification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;

@@ -39,7 +39,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     // Do any additional setup after loading the view from its nib.
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
@@ -58,7 +58,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     [self plotGraphData];
 }
 
-- (void) viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
@@ -96,13 +96,21 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
 
 #pragma mark - Graph plotting
 
-- (void) plotGraphData
+- (void)plotGraphData
 {
     NSMutableArray *pointsCenterLocations = [[NSMutableArray alloc] init];
     
     NSDictionary *graphRange = [self workOutRangeFromArray:_graphData];
     NSInteger range = [[graphRange objectForKey:@"range"] integerValue];
     NSInteger lowest = [[graphRange objectForKey:@"lowest"] integerValue];
+    NSInteger highest = [[graphRange objectForKey:@"highest"] integerValue];
+    
+    // in case all numbers are zero or all the same value
+    if (range == 0) {
+        lowest = 0;
+        if (highest == 0) highest = 10; //arbitary number in case all numbers are 0
+        range = highest * 2;
+    }
     
     CGPoint lastPoint = CGPointMake(0, 0);
     
@@ -136,7 +144,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
                            fromArray:pointsCenterLocations];
 }
 
-- (NSDictionary *) workOutRangeFromArray: (NSArray *) array
+- (NSDictionary *)workOutRangeFromArray:(NSArray *)array
 {
     array = [array sortedArrayUsingSelector:@selector(compare:)];
     
@@ -147,8 +155,8 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     float range = highest - lowest;
     
     NSDictionary *graphRange = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [NSNumber numberWithFloat:lowest], @"lowest", 
-                                [NSNumber numberWithFloat:highest], @"highest", 
+                                [NSNumber numberWithFloat:lowest], @"lowest",
+                                [NSNumber numberWithFloat:highest], @"highest",
                                 [NSNumber numberWithFloat:range], @"range", nil];
     
     return graphRange;
@@ -156,8 +164,8 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
 
 #pragma mark - Drawing methods
 
-- (void) createPointLabelForPoint:(CGPoint) point 
-                    withLabelText:(NSString *) string
+- (void)createPointLabelForPoint:(CGPoint)point
+                   withLabelText:(NSString *)string
 {
     UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(point.x , point.y, 30, 20)];
     tempLabel.textAlignment = NSTextAlignmentCenter;
@@ -171,8 +179,8 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     [tempLabel setText:string];
 }
 
-- (void) createBackgroundVerticalBarWithXCoord:(CGPoint)xCoord 
-                           withXAxisLabelIndex:(NSInteger)indexNumber
+- (void)createBackgroundVerticalBarWithXCoord:(CGPoint)xCoord
+                          withXAxisLabelIndex:(NSInteger)indexNumber
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 , 0, (self.graphWidth / [_graphData count]) - gapBetweenBackgroundVerticalBars, kDefaultGraphHeight * 2)];
     
@@ -194,9 +202,9 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     [label setCenter:CGPointMake(xCoord.x,16)];
 }
 
-- (void) drawLineBetweenPoint:(CGPoint)origin 
-                     andPoint:(CGPoint)destination 
-                   withColour:(UIColor *)colour
+- (void)drawLineBetweenPoint:(CGPoint)origin
+                    andPoint:(CGPoint)destination
+                  withColour:(UIColor *)colour
 {
     CAShapeLayer *lineShape = nil;
     CGMutablePathRef linePath = nil;
@@ -210,7 +218,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     lineShape.strokeColor = [colour CGColor];
     
     NSInteger x = origin.x; NSInteger y = origin.y;
-    NSInteger toX = destination.x; NSInteger toY = destination.y;                            
+    NSInteger toX = destination.x; NSInteger toY = destination.y;
     CGPathMoveToPoint(linePath, NULL, x, y);
     CGPathAddLineToPoint(linePath, NULL, toX, toY);
     
@@ -222,9 +230,9 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     lineShape = nil;
 }
 
-- (void) drawPointswithStrokeColour:(UIColor *)stroke 
-                            andFill:(UIColor *)fill 
-                          fromArray:(NSMutableArray *)pointsArray
+- (void)drawPointswithStrokeColour:(UIColor *)stroke
+                           andFill:(UIColor *)fill
+                         fromArray:(NSMutableArray *)pointsArray
 {
     NSMutableArray *pointCenterLocations = pointsArray;
     
@@ -246,16 +254,16 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
 
 #pragma mark - Rotation methods
 
-- (void) enableRotation
+- (void)enableRotation
 {
     // Start generating notifications for orientation change
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate) 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
 }
 
-- (void) didRotate
+- (void)didRotate
 {
     if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait) {
         [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
@@ -263,12 +271,12 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     }
 }
 
-- (BOOL) shouldAutorotate
+- (BOOL)shouldAutorotate
 {
     return NO;
 }
 
-- (NSUInteger) supportedInterfaceOrientations
+- (NSUInteger)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskLandscape;
 }
@@ -281,7 +289,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL) prefersStatusBarHidden
+- (BOOL)prefersStatusBarHidden
 {
     return YES;
 }
