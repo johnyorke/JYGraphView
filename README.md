@@ -1,6 +1,6 @@
 # JYGraphViewController
 
-JYGraphViewController is a class you can add to your project if you are looking for an easy way to visually represent an array of numbers in a line graph. By default it is presented modally when the device is turned into landscape orientation.
+JYGraphViewController is an easy way to graph data in a simple and minimalist style. By default it is presented modally when the device is turned into landscape orientation.
 
 <img src="https://raw.github.com/johnyorke/JYGraphViewController/master/JYGraphViewController/Screenshots/screenshotOne.png">
 
