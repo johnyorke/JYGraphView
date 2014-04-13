@@ -78,7 +78,9 @@
     
     NSMutableArray *arrayToPass = [NSMutableArray new];
     
-    for (NSInteger x = 0; x < _slider.value - 1; x++) {
+    long int xAxisCount = [self.textLabel.text integerValue];
+    
+    for (NSInteger x = 0; x < xAxisCount; x++) {
         UITextField *textField = [arrayOfFields objectAtIndex:x];
         NSRange range = [textField.text rangeOfString:@"."];
         if (range.location == NSNotFound) {
@@ -97,7 +99,7 @@
 {
     NSMutableArray *mutableArray = [NSMutableArray new];
     
-    NSInteger sliderValue = (int)_slider.value;
+    NSInteger sliderValue = [self.textLabel.text integerValue];
     
     NSString *alphabet = @"abcdefghijklmnopqrstuvwxyz";
     
@@ -158,6 +160,12 @@
 - (BOOL)shouldAutorotate
 {
     return NO;
+}
+
+- (IBAction)valueChanged:(id)sender 
+{
+    int value = roundl(self.slider.value);
+    self.textLabel.text = [NSString stringWithFormat:@"%d",value];
 }
 
 #pragma mark - Label and notifications

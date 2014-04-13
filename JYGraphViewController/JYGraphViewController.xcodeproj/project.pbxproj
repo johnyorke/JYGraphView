@@ -403,7 +403,7 @@
 				INFOPLIST_FILE = "JYGraphViewController/JYGraphViewController-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1C1399C1-B265-460A-AF42-A4542B595F01";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -420,7 +420,7 @@
 				INFOPLIST_FILE = "JYGraphViewController/JYGraphViewController-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1C1399C1-B265-460A-AF42-A4542B595F01";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
