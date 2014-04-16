@@ -132,13 +132,13 @@
         graphView.graphDataLabels = [self createXAxisLabelArray];
         
         // Customisation options
-        //        graphView.graphFillColor = [UIColor colorWithRed:0.94 green:0.32 blue:0.59 alpha:1.0];
-        //        graphView.graphStrokeColor = [UIColor darkGrayColor];
+                graphView.graphFillColor = [UIColor colorWithRed: 0.286 green: 0 blue: 0.429 alpha: 1];
+                graphView.graphStrokeColor = [UIColor colorWithRed: 0.59 green: 0 blue: 0.886 alpha: 1];
         //        graphView.hideLines = YES;
         //        graphView.graphWidth = 720;
         //        graphView.backgroundColor = [UIColor grayColor];
         //        graphView.barColor = [UIColor lightGrayColor];
-        //        graphView.labelFont = [UIFont fontWithName:@"AvenieNextCondensed-Regular" size:12];
+        //        graphView.labelFont = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:12];
         //        graphView.labelFontColor = [UIColor whiteColor];
         //        graphView.labelBackgroundColor = [UIColor grayColor];
         
