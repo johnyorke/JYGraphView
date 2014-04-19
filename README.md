@@ -1,4 +1,4 @@
-<img src="https://raw.github.com/johnyorke/JYGraphViewController/master/JYGraphViewController/Screenshots/photo.png">
+<img src="https://raw.github.com/johnyorke/JYGraphViewController/master/JYGraphViewController/Screenshots/photo.jpg">
 
 # JYGraphViewController
 
