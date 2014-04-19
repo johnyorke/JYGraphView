@@ -1,3 +1,5 @@
+<img src="https://raw.github.com/johnyorke/JYGraphViewController/master/JYGraphViewController/Screenshots/photo.png">
+
 # JYGraphViewController
 
 JYGraphViewController is an easy way to graph data in a simple and minimalist style. By default it is presented modally when the device is turned into landscape orientation.
