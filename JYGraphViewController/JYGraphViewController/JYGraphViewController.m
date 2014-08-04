@@ -68,11 +68,11 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
 - (void)setDefaultValues
 {
     // Set defaults values/options if none are set
-    if (!_graphStrokeColor) {
-        _graphStrokeColor = [UIColor colorWithRed:0.71f green: 1.0f blue: 0.196f alpha: 1.0f];
+    if (!_strokeColor) {
+        _strokeColor = [UIColor colorWithRed:0.71f green: 1.0f blue: 0.196f alpha: 1.0f];
     }
-    if (!_graphFillColor) {
-        _graphFillColor = [UIColor colorWithRed: 0.219f green: 0.657f blue: 0 alpha: 1.0f];
+    if (!_pointFillColor) {
+        _pointFillColor = [UIColor colorWithRed: 0.219f green: 0.657f blue: 0 alpha: 1.0f];
     }
     if (!self.graphWidth || self.graphWidth < [UIScreen mainScreen].bounds.size.height) {
         self.graphWidth = [UIScreen mainScreen].bounds.size.height * 2;
@@ -92,8 +92,8 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     if (!self.labelBackgroundColor) {
         self.labelBackgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.5f];
     }
-    if (!self.graphStrokeWidth) {
-        self.graphStrokeWidth = 2;
+    if (!self.strokeWidth) {
+        self.strokeWidth = 2;
     }
 }
 
@@ -134,7 +134,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
             // Check it's not the first item
             if (lastPoint.x != 0) {
                 if (!self.hideLines) {
-                    [self drawLineBetweenPoint:lastPoint andPoint:point withColour:_graphStrokeColor];
+                    [self drawLineBetweenPoint:lastPoint andPoint:point withColour:_strokeColor];
                 }
             }
         }
@@ -145,14 +145,14 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
         lastPoint = point;
     }
     
-    if (self.useCurvedLine == YES) {
+    if (self.useCurvedLine == YES && self.hideLines == NO) {
         [self drawCurvedLineBetweenPoints:pointsCenterLocations];
     }
     
     // Now draw all the points
     if (self.hidePoints == NO) {
-        [self drawPointswithStrokeColour:_graphStrokeColor
-                                 andFill:_graphFillColor
+        [self drawPointswithStrokeColour:_strokeColor
+                                 andFill:_pointFillColor
                                fromArray:pointsCenterLocations];
     }
     
@@ -225,7 +225,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     linePath = CGPathCreateMutable();
     lineShape = [CAShapeLayer layer];
     
-    lineShape.lineWidth = self.graphStrokeWidth;
+    lineShape.lineWidth = self.strokeWidth;
     lineShape.lineCap = kCALineCapRound;;
     lineShape.lineJoin = kCALineJoinBevel;
     
@@ -289,9 +289,9 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     
     shapeView.path = [path CGPath];
     
-    shapeView.strokeColor = self.graphStrokeColor.CGColor;
+    shapeView.strokeColor = self.strokeColor.CGColor;
     shapeView.fillColor = [UIColor clearColor].CGColor;
-    shapeView.lineWidth = self.graphStrokeWidth;
+    shapeView.lineWidth = self.strokeWidth;
     [shapeView setLineCap:kCALineCapRound];
     
     [self.graphView.layer addSublayer:shapeView];

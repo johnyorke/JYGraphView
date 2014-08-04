@@ -78,14 +78,14 @@ The default width of the graph is twice the width of the screen (when in landsca
 }
 ```
 
-If you wish to customise the look of the graph a bit, you can set the graphStrokeColour and graphFillColour with any UIColor before you present the graph.
+If you wish to customise the look of the graph a bit, you can set the strokeColor and fillColor with any UIColor before you present the graph.
 
 ```obj-c
 - (void) didRotate
 {
     ...
-    graphView.graphFillColour = [UIColor colorWithRed:0.21 green:0.00f blue:0.40 alpha:1.0];
-    graphView.graphStrokeColour = [UIColor colorWithRed:0.53 green:0.00 blue:0.98 alpha:1.0];
+    graphView.pointFillColor = [UIColor colorWithRed:0.21 green:0.00f blue:0.40 alpha:1.0];
+    graphView.strokeColor = [UIColor colorWithRed:0.53 green:0.00 blue:0.98 alpha:1.0];
     ...
 }
 ```
@@ -94,11 +94,11 @@ If you don't set these properties then two shades of green will be used instead.
 
 You can further customise the graphView by setting the following before presenting the view controller:
 
-`backgroundColor`, `barColor`, `labelFont`, `labelFontColor`, `labelBackgroundColor`, `graphStrokeWidth`, `hidePoints`, `useCurvedLine` and `hideLabels`.
+`backgroundColor`, `barColor`, `labelFont`, `labelFontColor`, `labelBackgroundColor`, `strokeWidth`, `hidePoints`, `useCurvedLine` and `hideLabels`.
 
 You can opt to hide the lines, points or labels setting their respective properties to **NO**.
 
-You can opt for the curved line that uses a Catmull-Rom spline interpolation by setting `useCurvedLine` to **YES**. Default is **NO**.
+You can opt for the curved line that uses the [Catmull-Rom spline](http://en.wikipedia.org/wiki/Centripetal_Catmull–Rom_spline) by setting `useCurvedLine` to **YES**. Default is **NO**.
 
 So a fully customised graph might look something like this:
 
@@ -107,8 +107,8 @@ So a fully customised graph might look something like this:
 {
     ...
         // Customisation options
-        graphView.graphFillColor = [UIColor colorWithRed:0.94 green:0.32 blue:0.59 alpha:1.0];
-        graphView.graphStrokeColor = [UIColor darkGrayColor];
+        graphView.fillColor = [UIColor colorWithRed:0.94 green:0.32 blue:0.59 alpha:1.0];
+        graphView.strokeColor = [UIColor darkGrayColor];
         graphView.useCurvedLine = YES;
         graphView.graphWidth = 720;
         graphView.backgroundColor = [UIColor grayColor];
