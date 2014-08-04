@@ -132,8 +132,11 @@
         graphView.graphDataLabels = [self createXAxisLabelArray];
         
         // Customisation options
-                graphView.graphFillColor = [UIColor colorWithRed: 0.286 green: 0 blue: 0.429 alpha: 1];
-                graphView.graphStrokeColor = [UIColor colorWithRed: 0.59 green: 0 blue: 0.886 alpha: 1];
+        graphView.graphFillColor = [UIColor colorWithRed: 0.286 green: 0 blue: 0.429 alpha: 1];
+        graphView.graphStrokeColor = [UIColor colorWithRed: 0.59 green: 0 blue: 0.886 alpha: 1];
+        graphView.useCurvedLine = YES;
+        graphView.hidePoints = YES;
+        graphView.graphStrokeWidth = 4;
         //        graphView.hideLines = YES;
         //        graphView.graphWidth = 720;
         //        graphView.backgroundColor = [UIColor grayColor];

@@ -4,11 +4,11 @@
 
 JYGraphViewController is an easy way to graph data in a simple and minimalist style. By default it is presented modally when the device is turned into landscape orientation.
 
-<img src="https://raw.github.com/johnyorke/JYGraphViewController/master/JYGraphViewController/Screenshots/screenshotOne.png">
+<img src="https://raw.github.com/johnyorke/JYGraphViewController/master/JYGraphViewController/Screenshots/graph.gif">
 
 # Intro
 
-JYGraphViewController is a slightly adapted version of the graph that appears in [Tempo/Weather](http://www.tempoweatherapp.com). It is meant to be presented modally and using the whole screen. The demo application it belongs to here presents it using an orientation change notification, but it could be triggered via any action. The benefit of having it presented based on orientation is that you don't have to obscure the graph with any controls. From a UX point of view, animating the presentation helps the user understand the graph is affected by gravity: ie. slides out when device is turned into landscape, and falls back away when returned to portrait.
+JYGraphViewController is a slightly adapted version of the graph that appears in [Tempo/Weather](http://www.appstore.com/tempoweather). It is meant to be presented modally and using the whole screen. The demo application it belongs to here presents it using an orientation change notification, but it could be triggered via any action. The benefit of having it presented based on orientation is that you don't have to obscure the graph with any controls. From a UX point of view, animating the presentation helps the user understand the graph is affected by gravity: ie. slides out when device is turned into landscape, and falls back away when returned to portrait.
 
 # Implementation
 
@@ -94,11 +94,11 @@ If you don't set these properties then two shades of green will be used instead.
 
 You can further customise the graphView by setting the following before presenting the view controller:
 
-`backgroundColor`, `barColor`, `labelFont`, `labelFontColor` and `labelBackgroundColor`
+`backgroundColor`, `barColor`, `labelFont`, `labelFontColor`, `labelBackgroundColor`, `graphStrokeWidth`, `hidePoints`, `useCurvedLine` and `hideLabels`.
 
-These are hopefully self-explanatory and all take UIColors with the exception of `labelFont` which, you've guessed it, takes a UIFont (ideally ofSize:12).
+You can opt to hide the lines, points or labels setting their respective properties to **NO**.
 
-You can opt to hide the lines that join the dots by setting `showLines` to **NO**.
+You can opt for the curved line that uses a Catmull-Rom spline interpolation by setting `useCurvedLine` to **YES**. Default is **NO**.
 
 So a fully customised graph might look something like this:
 
@@ -109,7 +109,7 @@ So a fully customised graph might look something like this:
         // Customisation options
         graphView.graphFillColor = [UIColor colorWithRed:0.94 green:0.32 blue:0.59 alpha:1.0];
         graphView.graphStrokeColor = [UIColor darkGrayColor];
-        graphView.hideLines = YES;
+        graphView.useCurvedLine = YES;
         graphView.graphWidth = 720;
         graphView.backgroundColor = [UIColor grayColor];
         graphView.barColor = [UIColor lightGrayColor];

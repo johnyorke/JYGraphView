@@ -14,7 +14,13 @@
 @property (strong, nonatomic) NSArray *graphDataLabels;
 @property (strong, nonatomic) UIColor *graphStrokeColor;
 @property (strong, nonatomic) UIColor *graphFillColor;
+
+@property NSUInteger graphStrokeWidth;
 @property (assign) BOOL hideLines;
+@property (assign) BOOL hidePoints;
+@property (assign) BOOL useCurvedLine;
+@property (assign) BOOL hideLabels;
+
 @property (assign) NSUInteger graphWidth;
 @property (strong, nonatomic) UIColor *backgroundColor;
 @property (strong, nonatomic) UIColor *barColor;

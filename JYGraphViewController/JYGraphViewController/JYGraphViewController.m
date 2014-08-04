@@ -92,6 +92,9 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     if (!self.labelBackgroundColor) {
         self.labelBackgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.5f];
     }
+    if (!self.graphStrokeWidth) {
+        self.graphStrokeWidth = 2;
+    }
 }
 
 #pragma mark - Graph plotting
@@ -123,14 +126,18 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
         
         [self createBackgroundVerticalBarWithXCoord:point withXAxisLabelIndex:counter-1];
         
-        [self createPointLabelForPoint:point withLabelText:[NSString stringWithFormat:@"%@",[_graphData objectAtIndex:counter - 1]]];
-                
-        // Check it's not the first item
-//        if (lastPoint.x != 0) {
-//            if (!self.hideLines) {
-//                [self drawLineBetweenPoint:lastPoint andPoint:point withColour:_graphStrokeColor];
-//            }
-//        }
+        if (self.hideLabels == NO) {
+            [self createPointLabelForPoint:point withLabelText:[NSString stringWithFormat:@"%@",[_graphData objectAtIndex:counter - 1]]];
+        }
+        
+        if (self.useCurvedLine == NO) {
+            // Check it's not the first item
+            if (lastPoint.x != 0) {
+                if (!self.hideLines) {
+                    [self drawLineBetweenPoint:lastPoint andPoint:point withColour:_graphStrokeColor];
+                }
+            }
+        }
         
         NSValue *pointValue = [[NSValue alloc] init];
         pointValue = [NSValue valueWithCGPoint:point];
@@ -138,12 +145,17 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
         lastPoint = point;
     }
     
-    [self drawCurvedLineBetweenPoints:pointsCenterLocations];
+    if (self.useCurvedLine == YES) {
+        [self drawCurvedLineBetweenPoints:pointsCenterLocations];
+    }
     
     // Now draw all the points
-//    [self drawPointswithStrokeColour:_graphStrokeColor
-//                             andFill:_graphFillColor
-//                           fromArray:pointsCenterLocations];
+    if (self.hidePoints == NO) {
+        [self drawPointswithStrokeColour:_graphStrokeColor
+                                 andFill:_graphFillColor
+                               fromArray:pointsCenterLocations];
+    }
+    
 }
 
 - (NSDictionary *)workOutRangeFromArray:(NSArray *)array
@@ -213,7 +225,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     linePath = CGPathCreateMutable();
     lineShape = [CAShapeLayer layer];
     
-    lineShape.lineWidth = 2.5f;
+    lineShape.lineWidth = self.graphStrokeWidth;
     lineShape.lineCap = kCALineCapRound;;
     lineShape.lineJoin = kCALineJoinBevel;
     
@@ -234,12 +246,10 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
 
 - (void)drawCurvedLineBetweenPoints:(NSArray *)points
 {
-    float granularity = 60;
+    float granularity = 100;
     
     UIBezierPath *path = [UIBezierPath bezierPath];
-    
-    //path.lineWidth = 4;
-    
+        
     [path moveToPoint:[self pointAtIndex:0 ofArray:points]];
     
     for (int index = 1; index < points.count - 2 ; index++) {
@@ -281,10 +291,8 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     
     shapeView.strokeColor = self.graphStrokeColor.CGColor;
     shapeView.fillColor = [UIColor clearColor].CGColor;
-    shapeView.lineWidth = 4;
+    shapeView.lineWidth = self.graphStrokeWidth;
     [shapeView setLineCap:kCALineCapRound];
-    
-    [path strokeWithBlendMode:kCGBlendModeNormal alpha:1.0];
     
     [self.graphView.layer addSublayer:shapeView];
 }
