@@ -124,13 +124,13 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
         [self createBackgroundVerticalBarWithXCoord:point withXAxisLabelIndex:counter-1];
         
         [self createPointLabelForPoint:point withLabelText:[NSString stringWithFormat:@"%@",[_graphData objectAtIndex:counter - 1]]];
-        
+                
         // Check it's not the first item
-        if (lastPoint.x != 0) {
-            if (!self.hideLines) {
-                [self drawLineBetweenPoint:lastPoint andPoint:point withColour:_graphStrokeColor];
-            }
-        }
+//        if (lastPoint.x != 0) {
+//            if (!self.hideLines) {
+//                [self drawLineBetweenPoint:lastPoint andPoint:point withColour:_graphStrokeColor];
+//            }
+//        }
         
         NSValue *pointValue = [[NSValue alloc] init];
         pointValue = [NSValue valueWithCGPoint:point];
@@ -138,10 +138,12 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
         lastPoint = point;
     }
     
+    [self drawCurvedLineBetweenPoints:pointsCenterLocations];
+    
     // Now draw all the points
-    [self drawPointswithStrokeColour:_graphStrokeColor
-                             andFill:_graphFillColor
-                           fromArray:pointsCenterLocations];
+//    [self drawPointswithStrokeColour:_graphStrokeColor
+//                             andFill:_graphFillColor
+//                           fromArray:pointsCenterLocations];
 }
 
 - (NSDictionary *)workOutRangeFromArray:(NSArray *)array
@@ -228,6 +230,70 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     [_graphView.layer addSublayer:lineShape];
     
     lineShape = nil;
+}
+
+- (void)drawCurvedLineBetweenPoints:(NSArray *)points
+{
+    float granularity = 60;
+    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    
+    //path.lineWidth = 4;
+    
+    [path moveToPoint:[self pointAtIndex:0 ofArray:points]];
+    
+    for (int index = 1; index < points.count - 2 ; index++) {
+        
+        CGPoint point0 = [self pointAtIndex:index - 1 ofArray:points];
+        CGPoint point1 = [self pointAtIndex:index ofArray:points];
+        CGPoint point2 = [self pointAtIndex:index + 1 ofArray:points];
+        CGPoint point3 = [self pointAtIndex:index + 2 ofArray:points];
+        
+        for (int i = 1; i < granularity ; i++) {
+            float t = (float) i * (1.0f / (float) granularity);
+            float tt = t * t;
+            float ttt = tt * t;
+            
+            CGPoint pi;
+            pi.x = 0.5 * (2*point1.x+(point2.x-point0.x)*t + (2*point0.x-5*point1.x+4*point2.x-point3.x)*tt + (3*point1.x-point0.x-3*point2.x+point3.x)*ttt);
+            pi.y = 0.5 * (2*point1.y+(point2.y-point0.y)*t + (2*point0.y-5*point1.y+4*point2.y-point3.y)*tt + (3*point1.y-point0.y-3*point2.y+point3.y)*ttt);
+            
+            if (pi.y > self.graphView.frame.size.height) {
+                pi.y = self.graphView.frame.size.height;
+            }
+            else if (pi.y < 0){
+                pi.y = 0;
+            }
+            
+            if (pi.x > point0.x) {
+                [path addLineToPoint:pi];
+            }
+        }
+        
+        [path addLineToPoint:point2];
+    }
+    
+    [path addLineToPoint:[self pointAtIndex:[points count] - 1 ofArray:points]];
+    
+    CAShapeLayer *shapeView = [[CAShapeLayer alloc] init];
+    
+    shapeView.path = [path CGPath];
+    
+    shapeView.strokeColor = self.graphStrokeColor.CGColor;
+    shapeView.fillColor = [UIColor clearColor].CGColor;
+    shapeView.lineWidth = 4;
+    [shapeView setLineCap:kCALineCapRound];
+    
+    [path strokeWithBlendMode:kCGBlendModeNormal alpha:1.0];
+    
+    [self.graphView.layer addSublayer:shapeView];
+}
+
+- (CGPoint)pointAtIndex:(NSUInteger)index ofArray:(NSArray *)array
+{
+    NSValue *value = [array objectAtIndex:index];
+    
+    return [value CGPointValue];
 }
 
 - (void)drawPointswithStrokeColour:(UIColor *)stroke
