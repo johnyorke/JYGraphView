@@ -8,6 +8,7 @@
 
 #import "JYGraphMenuViewController.h"
 #import "JYGraphViewController.h"
+#import "JYGraphView.h"
 
 @interface JYGraphMenuViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -120,8 +121,7 @@
     if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft ||
         [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
         
-        JYGraphViewController *graphView = [[JYGraphViewController alloc]
-                                            initWithNibName:@"JYGraphViewController" bundle:nil];
+        JYGraphView *graphView = [[JYGraphView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         
         // Set the data for the graph
         // Send only an array of number values
@@ -135,20 +135,52 @@
         graphView.pointFillColor = [UIColor colorWithRed: 0.286 green: 0 blue: 0.429 alpha: 1];
         graphView.strokeColor = [UIColor colorWithRed: 0.59 green: 0 blue: 0.886 alpha: 1];
         graphView.useCurvedLine = YES;
-        graphView.hidePoints = YES;
         graphView.strokeWidth = 4;
         //        graphView.hideLines = YES;
         //        graphView.graphWidth = 720;
-        //        graphView.backgroundColor = [UIColor grayColor];
+        graphView.backgroundColor = [UIColor grayColor];
         //        graphView.barColor = [UIColor lightGrayColor];
         //        graphView.labelFont = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:12];
         //        graphView.labelFontColor = [UIColor whiteColor];
         //        graphView.labelBackgroundColor = [UIColor grayColor];
+        graphView.hideLabels = YES;
         
-        if (![self.presentedViewController isBeingPresented]) {
-            [self presentViewController:graphView animated:YES completion:nil];
-        }
+        [self.view addSubview:graphView];
     }
+}
+- (IBAction)showGraph:(id)sender 
+{
+    JYGraphView *graphView = [[JYGraphView alloc] initWithFrame:CGRectMake(0,0, 300, 200)];
+    
+    graphView.center = self.view.center;
+    
+    // Set the data for the graph
+    // Send only an array of number values
+    graphView.graphData = [self createArrayToPassToGraph];
+    
+    // Set the xAxis labels
+    // Can send numbers or strings (it's printed using stringWithFormat:"%@")
+    graphView.graphDataLabels = [self createXAxisLabelArray];
+    
+    // Customisation options
+    graphView.pointFillColor = [UIColor colorWithRed: 0.286 green: 0 blue: 0.429 alpha: 1];
+    graphView.strokeColor = [UIColor colorWithRed: 0.59 green: 0 blue: 0.886 alpha: 1];
+    graphView.useCurvedLine = YES;
+    graphView.hideLabels = YES;
+    graphView.strokeWidth = 4;
+    graphView.graphWidth = graphView.frame.size.width * 4;
+    graphView.hidePoints = YES;
+    //        graphView.hideLines = YES;
+    //        graphView.graphWidth = 720;
+    //    graphView.backgroundViewColor = [UIColor grayColor];
+    //        graphView.barColor = [UIColor lightGrayColor];
+    //        graphView.labelFont = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:12];
+    //        graphView.labelFontColor = [UIColor whiteColor];
+    //        graphView.labelBackgroundColor = [UIColor grayColor];
+    
+    [graphView plotGraphData];
+    
+    [self.view addSubview:graphView];
 }
 
 - (void)enableRotation
