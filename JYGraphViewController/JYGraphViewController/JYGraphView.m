@@ -28,8 +28,6 @@ NSInteger const kPointLabelOffsetFromPointCenter = -24;
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.userInteractionEnabled = YES;
-        [self setDefaultValues];
     }
     return self;
 }
@@ -43,7 +41,7 @@ NSInteger const kPointLabelOffsetFromPointCenter = -24;
     if (!_pointFillColor) {
         _pointFillColor = [UIColor colorWithRed: 0.219f green: 0.657f blue: 0 alpha: 1.0f];
     }
-    if (!self.graphWidth || self.graphWidth < [UIScreen mainScreen].bounds.size.width) {
+    if (!self.graphWidth) {
         self.graphWidth = self.frame.size.width * 2;
     }
     if (!self.backgroundViewColor) {
@@ -70,6 +68,9 @@ NSInteger const kPointLabelOffsetFromPointCenter = -24;
 
 - (void)plotGraphData
 {
+    self.userInteractionEnabled = YES;
+    [self setDefaultValues];
+    
     self.graphView = [[UIView alloc] initWithFrame:self.frame];
     self.backgroundColor = self.backgroundViewColor;
     [self setContentSize:CGSizeMake(self.graphWidth, self.frame.size.height)];
@@ -215,7 +216,7 @@ NSInteger const kPointLabelOffsetFromPointCenter = -24;
     
     lineShape.path = linePath;
     CGPathRelease(linePath);
-    
+        
     [_graphView.layer addSublayer:lineShape];
     
     lineShape = nil;
@@ -270,7 +271,7 @@ NSInteger const kPointLabelOffsetFromPointCenter = -24;
     shapeView.fillColor = [UIColor clearColor].CGColor;
     shapeView.lineWidth = self.strokeWidth;
     [shapeView setLineCap:kCALineCapRound];
-    
+        
     [self.graphView.layer addSublayer:shapeView];
 }
 
