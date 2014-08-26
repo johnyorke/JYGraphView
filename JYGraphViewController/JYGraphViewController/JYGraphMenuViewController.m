@@ -81,7 +81,7 @@
     self.fontColour = [UIColor whiteColor];
     self.labelColour = [UIColor colorWithRed:60.0f/255 green:60.0f/255 blue:60.0f/255 alpha:0.75];
         
-    [self.fontPicker selectRow:30 inComponent:0 animated:NO];
+    [self.fontPicker selectRow:5 inComponent:0 animated:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -110,14 +110,23 @@
     // For test purposes only, set the values in the text fields
     // and pass them to the graph
     
-    NSArray *xAxisValues = @[@2,@4,@3,@5,@5,@7,@9,@10,@14,@16,@18,@22,@23,@26,@26,@24,@22,@20,@18,@12,@11,@12,@8,@4];
+    NSMutableArray *randomNumbers = [NSMutableArray new];
     
+    for (int x = 1; x <= 24; x++) {
+        NSInteger low = x * 5;
+        NSInteger high = (x * 5) + low;
+        
+        NSInteger num = low + arc4random_uniform(high);
+        
+        [randomNumbers addObject:[NSNumber numberWithInteger:num]];
+    }
+        
     NSMutableArray *mutableArray = [NSMutableArray new];
     
     int value = roundl(self.xAxisValueSlider.value);
     
     for (int x = 0; x < value  ; x++) {
-        [mutableArray addObject:[xAxisValues objectAtIndex:x]];
+        [mutableArray addObject:[randomNumbers objectAtIndex:x]];
     }
     
     return [NSArray arrayWithArray:mutableArray];
@@ -172,6 +181,7 @@
     graphView.useCurvedLine = self.curvedLine.isOn;
     graphView.hideLabels = self.hidelabels.isOn;
     graphView.strokeWidth = 4;
+    graphView.graphWidth = graphView.frame.size.width * 2;
     graphView.hidePoints = self.hidePoints.isOn;
     graphView.hideLines = self.hideLines.isOn;
     graphView.backgroundViewColor = self.graphBackgroundColour;

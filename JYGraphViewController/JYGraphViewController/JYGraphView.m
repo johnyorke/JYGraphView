@@ -11,7 +11,7 @@
 
 NSUInteger const kGapBetweenBackgroundVerticalBars = 4;
 float const kPercentageOfScreenHeightToUse = 0.8f;
-NSInteger const kPointLabelOffsetFromPointCenter = -24;
+NSInteger const kPointLabelOffsetFromPointCenter = -20;
 
 @interface JYGraphView ()
 
@@ -42,7 +42,7 @@ NSInteger const kPointLabelOffsetFromPointCenter = -24;
         _pointFillColor = [UIColor colorWithRed: 0.219f green: 0.657f blue: 0 alpha: 1.0f];
     }
     if (!self.graphWidth) {
-        self.graphWidth = self.frame.size.width * 2;
+        self.graphWidth = self.frame.size.width;
     }
     if (!self.backgroundViewColor) {
         self.backgroundViewColor = [UIColor blackColor];
@@ -227,6 +227,12 @@ NSInteger const kPointLabelOffsetFromPointCenter = -24;
     float granularity = 100;
     
     UIBezierPath *path = [UIBezierPath bezierPath];
+    
+    NSMutableArray *mutableArray = [NSMutableArray arrayWithArray:points];
+    
+    [mutableArray addObject:[points lastObject]];
+    
+    points = [NSArray arrayWithArray:mutableArray];
     
     [path moveToPoint:[self pointAtIndex:0 ofArray:points]];
     
