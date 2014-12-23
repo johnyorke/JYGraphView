@@ -11,18 +11,18 @@ JYGraphViewController is an easy way to graph data in a simple and minimalist st
 JYGraphViewController is a slightly adapted version of the graph that appears in [Tempo/Weather](http://www.appstore.com/tempoweather). JYGraphView is a sublass of UIScrollView. You can get one on screen easily using code:
 
 ```obj-c
-    JYGraphView *graphView = [[JYGraphView alloc] initWithFrame:frame];
+JYGraphView *graphView = [[JYGraphView alloc] initWithFrame:frame];
 
-    // Set the data for the graph
-    graphView.graphData = @[@2,@4,@5,@7,@8,@10,@10,@10,@12,@10,@20,@21];
+// Set the data for the graph
+graphView.graphData = @[@2,@4,@5,@7,@8,@10,@10,@10,@12,@10,@20,@21];
 
-    // Set the xAxis labels (optional)
-    graphView.graphXAxisLabels = @[@"Jan",@"Feb",@"Mar",@"Apr",@"May",@Jun",@"Jul",@"Aug",@"Sep",@"Oct",@"Nov",@"Dec"];
+// Set the xAxis labels (optional)
+graphView.graphXAxisLabels = @[@"Jan",@"Feb",@"Mar",@"Apr",@"May",@"Jun",@"Jul",@"Aug",@"Sep",@"Oct",@"Nov",@"Dec"];
 
-    // NB. call this to graw the graph or refresh it if data has changed
-    [graphView plotGraphData]
+// NB. call this to graw the graph or refresh it if data has changed
+[graphView plotGraphData]
 
-    [self.view addSubview:graphView];
+[self.view addSubview:graphView];
 ```
 
 Alternatively, if you use xibs you can drop a UIView into your xib > Identity Inspector > change the class name to JYGraphView.
@@ -48,8 +48,8 @@ By default the graph uses a UIView subclass (JYGraphPoint) to draw each point.
 If you wish to customise the look of the graph a bit, you can set the strokeColor and fillColor with any UIColor before you present the graph.
 
 ```obj-c
-    graphView.pointFillColor = [UIColor colorWithRed:0.21 green:0.00f blue:0.40 alpha:1.0];
-    graphView.strokeColor = [UIColor colorWithRed:0.53 green:0.00 blue:0.98 alpha:1.0];
+graphView.pointFillColor = [UIColor colorWithRed:0.21 green:0.00f blue:0.40 alpha:1.0];
+graphView.strokeColor = [UIColor colorWithRed:0.53 green:0.00 blue:0.98 alpha:1.0];
 ```
 
 You can further customise the graphView by setting the following before calling `plotGraphData`:
@@ -63,16 +63,16 @@ You can opt for the curved line that uses the [Catmull-Rom spline](http://en.wik
 So a fully customised graph might look something like this:
 
 ```obj-c
-        // Customisation options
-        graphView.fillColor = [UIColor colorWithRed:0.94 green:0.32 blue:0.59 alpha:1.0];
-        graphView.strokeColor = [UIColor darkGrayColor];
-        graphView.useCurvedLine = YES;
-        graphView.graphWidth = 720;
-        graphView.backgroundColor = [UIColor grayColor];
-        graphView.barColor = [UIColor lightGrayColor];
-        graphView.labelFont = [UIFont fontWithName:@"AvenieNextCondensed-Regular" size:12];
-        graphView.labelFontColor = [UIColor whiteColor];
-        graphView.labelBackgroundColor = [UIColor grayColor];
+// Customisation options
+graphView.fillColor = [UIColor colorWithRed:0.94 green:0.32 blue:0.59 alpha:1.0];
+graphView.strokeColor = [UIColor darkGrayColor];
+graphView.useCurvedLine = YES;
+graphView.graphWidth = 720;
+graphView.backgroundColor = [UIColor grayColor];
+graphView.barColor = [UIColor lightGrayColor];
+graphView.labelFont = [UIFont fontWithName:@"AvenieNextCondensed-Regular" size:12];
+graphView.labelFontColor = [UIColor whiteColor];
+graphView.labelBackgroundColor = [UIColor grayColor];
 ```
 
 Some examples of customised graphs:
