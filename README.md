@@ -1,10 +1,10 @@
-<img src="https://raw.github.com/johnyorke/JYGraphViewController/master/JYGraphViewController/Screenshots/photo.jpg">
+<img src="https://raw.github.com/johnyorke/JYGraphView/master/JYGraphView/Screenshots/photo.jpg">
 
-# JYGraphViewController
+# JYGraphView
 
-JYGraphViewController is an easy way to graph data in a simple and minimalist style and is highly customisable.
+JYGraphView is an easy way to graph data in a simple and minimalist style and is highly customisable.
 
-<img src="https://raw.github.com/johnyorke/JYGraphViewController/master/JYGraphViewController/Screenshots/graph.gif">
+<img src="https://raw.github.com/johnyorke/JYGraphView/master/JYGraphView/Screenshots/graph.gif">
 
 # Intro
 
