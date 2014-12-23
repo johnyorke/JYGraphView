@@ -10,8 +10,9 @@
 #import "JYGraphPoint.h"
 
 NSUInteger const kGapBetweenBackgroundVerticalBars = 4;
-float const kPercentageOfScreenHeightToUse = 0.8f;
-NSInteger const kPointLabelOffsetFromPointCenter = -20;
+NSInteger const kPointLabelOffsetFromPointCenter = 20;
+NSInteger const kBarLabelHeight = 20;
+NSInteger const kPointLabelHeight = 20;
 
 @interface JYGraphView ()
 
@@ -42,7 +43,7 @@ NSInteger const kPointLabelOffsetFromPointCenter = -20;
         _pointFillColor = [UIColor colorWithRed: 0.219f green: 0.657f blue: 0 alpha: 1.0f];
     }
     if (!self.graphWidth) {
-        self.graphWidth = self.frame.size.width;
+        self.graphWidth = self.frame.size.width * 2;
     }
     if (!self.backgroundViewColor) {
         self.backgroundViewColor = [UIColor blackColor];
@@ -99,8 +100,10 @@ NSInteger const kPointLabelOffsetFromPointCenter = -20;
         
         NSInteger xCoord = (self.graphWidth / [_graphData count]) * counter;
         
+        float screenHeight = (self.frame.size.height - (kPointLabelHeight + kPointLabelOffsetFromPointCenter + kBarLabelHeight)) / self.frame.size.height; 
+        
         CGPoint point = CGPointMake(xCoord,
-                                    self.frame.size.height - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((self.frame.size.height * kPercentageOfScreenHeightToUse) / range)) - (lowest * ((self.frame.size.height * kPercentageOfScreenHeightToUse) / range ))));
+                                    self.frame.size.height - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((self.frame.size.height * screenHeight) / range)) - (lowest * ((self.frame.size.height * screenHeight) / range ))));
         
         [self createBackgroundVerticalBarWithXCoord:point withXAxisLabelIndex:counter-1];
         
@@ -159,7 +162,7 @@ NSInteger const kPointLabelOffsetFromPointCenter = -20;
 - (void)createPointLabelForPoint:(CGPoint)point
                    withLabelText:(NSString *)string
 {
-    UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(point.x , point.y, 30, 20)];
+    UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(point.x , point.y, 30, kPointLabelHeight)];
     tempLabel.textAlignment = NSTextAlignmentCenter;
     [tempLabel setTextColor:self.labelFontColor];
     [tempLabel setBackgroundColor:self.labelBackgroundColor];
@@ -167,7 +170,7 @@ NSInteger const kPointLabelOffsetFromPointCenter = -20;
     [tempLabel setAdjustsFontSizeToFitWidth:YES];
     [tempLabel setMinimumScaleFactor:0.6];
     [_graphView addSubview:tempLabel];
-    [tempLabel setCenter:CGPointMake(point.x, point.y + kPointLabelOffsetFromPointCenter)];
+    [tempLabel setCenter:CGPointMake(point.x, point.y - kPointLabelOffsetFromPointCenter)];
     [tempLabel setText:string];
 }
 
