@@ -177,6 +177,11 @@ NSInteger const kPointLabelHeight = 20;
 - (void)createBackgroundVerticalBarWithXCoord:(CGPoint)xCoord
                           withXAxisLabelIndex:(NSInteger)indexNumber
 {
+    CGFloat x = self.graphWidth % _graphData.count;
+    
+    // Update the frame size for graphData.count results that don't fit into graphWidth
+    [self setContentSize:CGSizeMake(self.graphWidth - x, self.frame.size.height)];
+    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 , 0, (self.graphWidth / [_graphData count]) - kGapBetweenBackgroundVerticalBars, self.frame.size.height * 2)];
     
     label.textAlignment = NSTextAlignmentCenter;
