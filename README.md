@@ -1,10 +1,10 @@
-<img src="https://raw.github.com/johnyorke/JYGraphView/master/JYGraphView/Screenshots/photo.jpg">
+<img src="https://raw.githubusercontent.com/johnyorke/JYGraphView/master/JYGraphViewDemoProject/Screenshots/photo.jpg">
 
 # JYGraphView
 
 JYGraphView is an easy way to graph data in a simple and minimalist style and is highly customisable.
 
-<img src="https://raw.github.com/johnyorke/JYGraphView/master/JYGraphView/Screenshots/graph.gif">
+<img src="https://raw.githubusercontent.com/johnyorke/JYGraphView/master/JYGraphViewDemoProject/Screenshots/graph.gif">
 
 # Intro
 
