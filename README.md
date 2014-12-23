@@ -8,7 +8,9 @@ JYGraphView is an easy way to graph data in a simple and minimalist style and is
 
 # Intro
 
-JYGraphView is a slightly adapted version of the graph that appears in [Tempo/Weather](http://www.appstore.com/tempoweather). JYGraphView is a sublass of UIScrollView. You can get one on screen easily using code:
+JYGraphView is a slightly adapted version of the graph that appears in [Tempo/Weather](http://www.appstore.com/tempoweather). JYGraphView is a sublass of UIScrollView.
+
+You can get one on screen easily using code:
 
 ```obj-c
 JYGraphView *graphView = [[JYGraphView alloc] initWithFrame:frame];
@@ -44,6 +46,8 @@ Drag the following files into your project:
 By default the graph uses a UIView subclass (JYGraphPoint) to draw each point.
 
 # Customisation
+
+**NB. I highly recommend you download the sample project and run it on a device or in the simulator to play around with the customisation options (it looks better on iPad).**
 
 If you wish to customise the look of the graph a bit, you can set the strokeColor and fillColor with any UIColor before you present the graph.
 
