@@ -8,7 +8,7 @@ JYGraphView is an easy way to graph data in a simple and minimalist style and is
 
 # Intro
 
-JYGraphViewController is a slightly adapted version of the graph that appears in [Tempo/Weather](http://www.appstore.com/tempoweather). JYGraphView is a sublass of UIScrollView. You can get one on screen easily using code:
+JYGraphView is a slightly adapted version of the graph that appears in [Tempo/Weather](http://www.appstore.com/tempoweather). JYGraphView is a sublass of UIScrollView. You can get one on screen easily using code:
 
 ```obj-c
 JYGraphView *graphView = [[JYGraphView alloc] initWithFrame:frame];
@@ -36,8 +36,8 @@ The default content width of the `graphView` is twice the width of the frame. Yo
 
 Drag the following files into your project:
 
-* JYGraphViewController.h
-* JYGraphViewController.m
+* JYGraphView.h
+* JYGraphView.m
 * JYGraphPoint.h
 * JYGraphPoint.m
 
@@ -77,10 +77,10 @@ graphView.labelBackgroundColor = [UIColor grayColor];
 
 Some examples of customised graphs:
 
-<img src="https://raw.github.com/johnyorke/JYGraphViewController/master/JYGraphViewController/Screenshots/graphs.gif">
+<img src="https://raw.githubusercontent.com/johnyorke/JYGraphView/master/JYGraphViewDemoProject/Screenshots/graphs.gif">
 
 
-# What the graph controller actually does
+# What the graph view actually does
 
 The graph takes your numbers, works out the range, translates them into coordinates, then draws the elements:
 * background bar (which is actually a label)
