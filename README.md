@@ -2,97 +2,57 @@
 
 # JYGraphViewController
 
-JYGraphViewController is an easy way to graph data in a simple and minimalist style. By default it is presented modally when the device is turned into landscape orientation.
+JYGraphViewController is an easy way to graph data in a simple and minimalist style and is highly customisable.
 
 <img src="https://raw.github.com/johnyorke/JYGraphViewController/master/JYGraphViewController/Screenshots/graph.gif">
 
 # Intro
 
-JYGraphViewController is a slightly adapted version of the graph that appears in [Tempo/Weather](http://www.appstore.com/tempoweather). It is meant to be presented modally and using the whole screen. The demo application it belongs to here presents it using an orientation change notification, but it could be triggered via any action. The benefit of having it presented based on orientation is that you don't have to obscure the graph with any controls. From a UX point of view, animating the presentation helps the user understand the graph is affected by gravity: ie. slides out when device is turned into landscape, and falls back away when returned to portrait.
+JYGraphViewController is a slightly adapted version of the graph that appears in [Tempo/Weather](http://www.appstore.com/tempoweather). JYGraphView is a sublass of UIScrollView. You can get one on screen easily using code:
 
-# Implementation
+```obj-c
+    JYGraphView *graphView = [[JYGraphView alloc] initWithFrame:frame];
+
+    // Set the data for the graph
+    graphView.graphData = @[@2,@4,@5,@7,@8,@10,@10,@10,@12,@10,@20,@21];
+
+    // Set the xAxis labels (optional)
+    graphView.graphXAxisLabels = @[@"Jan",@"Feb",@"Mar",@"Apr",@"May",@Jun",@"Jul",@"Aug",@"Sep",@"Oct",@"Nov",@"Dec"];
+
+    // NB. call this to graw the graph or refresh it if data has changed
+    [graphView plotGraphData]
+
+    [self.view addSubview:graphView];
+```
+
+Alternatively, if you use xibs you can drop a UIView into your xib > Identity Inspector > change the class name to JYGraphView.
+
+If you don't set any of the colours, fonts, etc, the graph will be displayed in its default style (same as [Tempo/Weather](http://www.appstore.com/tempoweather)). 
+
+The default content width of the `graphView` is twice the width of the frame. You can set your own width to either narrower or wider values simply by setting `graphWidth` before calling .
+
+
+# Files you'll need
 
 Drag the following files into your project:
 
 * JYGraphViewController.h
 * JYGraphViewController.m
-* JYGraphViewController.xib
 * JYGraphPoint.h
 * JYGraphPoint.m
 
-If you wish to have the graph presented when the device is turned landscape, add the presenting view as an observer to UIDeviceOrientationDidChangeNotification with a selector such as `didRotate`. When the device is turned into landscapeLeft or landscapeRight...
-
-```obj-c
-- (void) didRotate
-{
-    if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft ||
-        [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
-
-    JYGraphViewController *graphView = [[JYGraphViewController alloc] initWithNibName:@"JYGraphViewController" bundle:nil];
-
-    // Set the data for the graph
-    // Send only an array of number values
-    graphView.graphData = [self createArrayOfNumbersToPassToGraph];
-
-    // Set the xAxis labels (optional)
-    // Can send numbers or strings (it's printed using stringWithFormat:"%@")
-    graphView.graphXAxisLabels = [self createXAxisLabelArray];
-
-    [self presentViewController:graphView animated:YES completion:nil];
-    }
-}
-```
-
-You might also wish to switch off rotation for the presenting view controller using:
-
-```obj-c
-- (BOOL) shouldAutorotate
-{
-    return NO;
-}
-```
-
-By default the graph uses a UIView subclass to draw each point. You can grab the JYGraphPoint files and use them if you wish, or you can use your own graphics/class. If you do that just replace any mention of JYGraphPoint in JYGraphViewController.m with your own solution.
-
-This is (hopefully) all you need to do! The above will take your array of numbers and divide `graphWidth` by your array count.
+By default the graph uses a UIView subclass (JYGraphPoint) to draw each point.
 
 # Customisation
-
-The default width of the graph is twice the width of the screen (when in landscape). You can set your own width to either narrower or wider values simply by setting `graphWidth`.
-
-```obj-c
-- (void) didRotate
-{
-    ...
-    JYGraphViewController *graphView = [[JYGraphViewController alloc] initWithNibName:@"JYGraphViewController" bundle:nil];
-
-    // Set the graph values
-    graphView.graphData = arrayOfNumbers;
-
-    // Set the graph value labels
-    graphView.graphDataLabels = arrayOfLabels;
-
-    // Set the width of the graph
-    graphView.graphWidth = 568 // width of a 4" screen when in landscape
-    ...
-}
-```
 
 If you wish to customise the look of the graph a bit, you can set the strokeColor and fillColor with any UIColor before you present the graph.
 
 ```obj-c
-- (void) didRotate
-{
-    ...
     graphView.pointFillColor = [UIColor colorWithRed:0.21 green:0.00f blue:0.40 alpha:1.0];
     graphView.strokeColor = [UIColor colorWithRed:0.53 green:0.00 blue:0.98 alpha:1.0];
-    ...
-}
 ```
 
-If you don't set these properties then two shades of green will be used instead.
-
-You can further customise the graphView by setting the following before presenting the view controller:
+You can further customise the graphView by setting the following before calling `plotGraphData`:
 
 `backgroundColor`, `barColor`, `labelFont`, `labelFontColor`, `labelBackgroundColor`, `strokeWidth`, `hidePoints`, `useCurvedLine` and `hideLabels`.
 
@@ -103,9 +63,6 @@ You can opt for the curved line that uses the [Catmull-Rom spline](http://en.wik
 So a fully customised graph might look something like this:
 
 ```obj-c
-- (void) didRotate
-{
-    ...
         // Customisation options
         graphView.fillColor = [UIColor colorWithRed:0.94 green:0.32 blue:0.59 alpha:1.0];
         graphView.strokeColor = [UIColor darkGrayColor];
@@ -116,8 +73,6 @@ So a fully customised graph might look something like this:
         graphView.labelFont = [UIFont fontWithName:@"AvenieNextCondensed-Regular" size:12];
         graphView.labelFontColor = [UIColor whiteColor];
         graphView.labelBackgroundColor = [UIColor grayColor];
-        ...
-}
 ```
 
 Some examples of customised graphs:
@@ -135,20 +90,17 @@ The graph takes your numbers, works out the range, translates them into coordina
 
 # Possible use case
 
-1. Use the M7 chip on the iPhone 5s to show step counter data for the last 7/10/30 days
+1. Use the motion chip on the iPhone to show step counter data for the last 7/10/30 days
 2. Link it to your app sales and show the trend for the last 30 days/12 months
 3. Use it in your weather app to show predicted temperature for the next 24 hours/7 days
-4. Twitter app could show the number of followers you've gained/lost over last 90 days
-5. Plot open issues/resolved per day in your project planning application
 
 # Known issues
 
-1. Currently no checks to see if the data coming through is a number
-2. There is a small amount of empty space over to the right of the graph
+1. No tests. I know. I'm a bad programmer.
 
 # Thanks
 
-First of all I would be thrilled if someone used this in their project and let me know about it. Secondly, I would be equally thrilled if someone gets in touch with ways in which to improve JYGraphViewController.
+First of all I would be thrilled if someone used this in their project and let me know about it. Secondly, I would be equally thrilled if someone gets in touch with ways in which to improve JYGraphView.
 
 You can email me ([hello@johnyorke.me](mailto:hello@johnyorke.me)) or get in touch on Twitter [@johnyorke](http://www.twitter.com/johnyorke)
 
