@@ -24,6 +24,7 @@
 		CA5006CB19A93CD800E993E6 /* JYGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5006CA19A93CD800E993E6 /* JYGraphView.m */; };
 		CAD411471850B53D005C28F2 /* JYGraphPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD411461850B53D005C28F2 /* JYGraphPoint.m */; };
 		DF233F04185272920022C2B0 /* phoneRotationIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = DF233F03185272920022C2B0 /* phoneRotationIcon.png */; };
+		DFE95DC11A49723C00FB8AD7 /* JYGraphMenuViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFE95DC01A49723C00FB8AD7 /* JYGraphMenuViewController~ipad.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		CAD411461850B53D005C28F2 /* JYGraphPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYGraphPoint.m; sourceTree = "<group>"; };
 		DF233F01185250B40022C2B0 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		DF233F03185272920022C2B0 /* phoneRotationIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phoneRotationIcon.png; sourceTree = "<group>"; };
+		DFE95DC01A49723C00FB8AD7 /* JYGraphMenuViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "JYGraphMenuViewController~ipad.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				CA4F16B0184D0CDB00AE2475 /* JYGraphMenuViewController.h */,
 				CA4F16B1184D0CDB00AE2475 /* JYGraphMenuViewController.m */,
 				CA4F16B2184D0CDB00AE2475 /* JYGraphMenuViewController.xib */,
+				DFE95DC01A49723C00FB8AD7 /* JYGraphMenuViewController~ipad.xib */,
 				CA5006C919A93CD800E993E6 /* JYGraphView.h */,
 				CA5006CA19A93CD800E993E6 /* JYGraphView.m */,
 				CAD411451850B53D005C28F2 /* JYGraphPoint.h */,
@@ -250,6 +253,7 @@
 				CA4F16B7184D0CDB00AE2475 /* JYGraphMenuViewController.xib in Resources */,
 				CA4F1694184D0CB600AE2475 /* Images.xcassets in Resources */,
 				DF233F04185272920022C2B0 /* phoneRotationIcon.png in Resources */,
+				DFE95DC11A49723C00FB8AD7 /* JYGraphMenuViewController~ipad.xib in Resources */,
 				CA4F1686184D0CB600AE2475 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -398,6 +402,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -415,6 +420,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
