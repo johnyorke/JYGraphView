@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JYGraphMenuViewController : UIViewController
+@interface JYGraphMenuViewController : UIViewController <UIPickerViewDataSource,UIPickerViewDelegate>
 
 @end

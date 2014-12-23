@@ -1,14 +1,14 @@
 //
-//  JYGraphViewController.h
-//  JYGraph
+//  JYGraphView.h
+//  JYGraphViewController
 //
-//  Created by John Yorke on 28/11/2013.
-//  Copyright (c) 2013 John Yorke. All rights reserved.
+//  Created by John Yorke on 23/08/2014.
+//  Copyright (c) 2014 John Yorke. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface JYGraphViewController : UIViewController
+@interface JYGraphView : UIScrollView
 
 // Array of NSNumbers used to plot points on graph
 @property (strong, nonatomic) NSArray *graphData;
@@ -45,7 +45,7 @@
 @property (assign) NSUInteger graphWidth;
 
 // Background colour for the scrollView
-@property (strong, nonatomic) UIColor *backgroundColor;
+@property (strong, nonatomic) UIColor *backgroundViewColor;
 
 // Colour of the vertical bar that defines each x axis values
 @property (strong, nonatomic) UIColor *barColor;
@@ -58,5 +58,7 @@
 
 // Colour of the background for the x and y axis UILabels
 @property (strong, nonatomic) UIColor *labelBackgroundColor;
+
+- (void)plotGraphData;
 
 @end

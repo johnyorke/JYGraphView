@@ -1,68 +1,36 @@
 //
-//  JYGraphViewController.m
-//  JYGraph
+//  JYGraphView.m
+//  JYGraphViewController
 //
-//  Created by John Yorke on 28/11/2013.
-//  Copyright (c) 2013 John Yorke. All rights reserved.
+//  Created by John Yorke on 23/08/2014.
+//  Copyright (c) 2014 John Yorke. All rights reserved.
 //
 
-#import "JYGraphViewController.h"
+#import "JYGraphView.h"
 #import "JYGraphPoint.h"
 
-NSUInteger const kDefaultGraphHeight = 320;
-NSUInteger const gapBetweenBackgroundVerticalBars = 4;
-float const percentageOfScreenHeightToUse = 0.8f;
-NSInteger const pointLabelOffsetFromPointCenter = -24;
+NSUInteger const kGapBetweenBackgroundVerticalBars = 4;
+NSInteger const kPointLabelOffsetFromPointCenter = 20;
+NSInteger const kBarLabelHeight = 20;
+NSInteger const kPointLabelHeight = 20;
 
-@interface JYGraphViewController ()
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIView *graphView;
+@interface JYGraphView ()
+
+@property (nonatomic, strong) UIView *graphView;
 
 @end
 
-@implementation JYGraphViewController
+#import "JYGraphView.h"
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@implementation JYGraphView
+
+- (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithFrame:frame];
     if (self) {
-        // Custom initialization
+        // Initialization code
     }
     return self;
-}
-
-#pragma mark - viewDid/Will
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [self setDefaultValues];
-    
-    [self.view addSubview:_scrollView];
-    [_scrollView setContentSize:CGSizeMake(self.graphWidth, kDefaultGraphHeight)];
-    [_scrollView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height)];
-    [_scrollView addSubview:_graphView];
-    
-    NSInteger xCoordOffset = (self.graphWidth / [_graphData count]) / 2;
-    [_graphView setFrame:CGRectMake(0 - xCoordOffset, 0, self.graphWidth, kDefaultGraphHeight)];
-    
-    self.scrollView.backgroundColor = self.backgroundColor;
-    
-    [self plotGraphData];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self enableRotation];
 }
 
 - (void)setDefaultValues
@@ -74,11 +42,11 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     if (!_pointFillColor) {
         _pointFillColor = [UIColor colorWithRed: 0.219f green: 0.657f blue: 0 alpha: 1.0f];
     }
-    if (!self.graphWidth || self.graphWidth < [UIScreen mainScreen].bounds.size.height) {
-        self.graphWidth = [UIScreen mainScreen].bounds.size.height * 2;
+    if (!self.graphWidth) {
+        self.graphWidth = self.frame.size.width * 2;
     }
-    if (!self.backgroundColor) {
-        self.backgroundColor = [UIColor blackColor];
+    if (!self.backgroundViewColor) {
+        self.backgroundViewColor = [UIColor blackColor];
     }
     if (!self.barColor) {
         self.barColor = [UIColor colorWithRed:0.05f green:0.05f blue:0.05f alpha:1.0f];
@@ -101,6 +69,17 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
 
 - (void)plotGraphData
 {
+    self.userInteractionEnabled = YES;
+    [self setDefaultValues];
+    
+    self.graphView = [[UIView alloc] initWithFrame:self.frame];
+    self.backgroundColor = self.backgroundViewColor;
+    [self setContentSize:CGSizeMake(self.graphWidth, self.frame.size.height)];
+    [self addSubview:_graphView];
+    
+    NSInteger xCoordOffset = (self.graphWidth / [_graphData count]) / 2;
+    [_graphView setFrame:CGRectMake(0 - xCoordOffset, 0, self.graphWidth, self.frame.size.height)];
+            
     NSMutableArray *pointsCenterLocations = [[NSMutableArray alloc] init];
     
     NSDictionary *graphRange = [self workOutRangeFromArray:_graphData];
@@ -121,8 +100,10 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
         
         NSInteger xCoord = (self.graphWidth / [_graphData count]) * counter;
         
+        float screenHeight = (self.frame.size.height - (kPointLabelHeight + kPointLabelOffsetFromPointCenter + kBarLabelHeight)) / self.frame.size.height; 
+        
         CGPoint point = CGPointMake(xCoord,
-                                    kDefaultGraphHeight - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((kDefaultGraphHeight * percentageOfScreenHeightToUse) / range)) - (lowest * ((kDefaultGraphHeight * percentageOfScreenHeightToUse) / range ))));
+                                    self.frame.size.height - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((self.frame.size.height * screenHeight) / range)) - (lowest * ((self.frame.size.height * screenHeight) / range ))));
         
         [self createBackgroundVerticalBarWithXCoord:point withXAxisLabelIndex:counter-1];
         
@@ -181,7 +162,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
 - (void)createPointLabelForPoint:(CGPoint)point
                    withLabelText:(NSString *)string
 {
-    UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(point.x , point.y, 30, 20)];
+    UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(point.x , point.y, 30, kPointLabelHeight)];
     tempLabel.textAlignment = NSTextAlignmentCenter;
     [tempLabel setTextColor:self.labelFontColor];
     [tempLabel setBackgroundColor:self.labelBackgroundColor];
@@ -189,14 +170,19 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     [tempLabel setAdjustsFontSizeToFitWidth:YES];
     [tempLabel setMinimumScaleFactor:0.6];
     [_graphView addSubview:tempLabel];
-    [tempLabel setCenter:CGPointMake(point.x, point.y + pointLabelOffsetFromPointCenter)];
+    [tempLabel setCenter:CGPointMake(point.x, point.y - kPointLabelOffsetFromPointCenter)];
     [tempLabel setText:string];
 }
 
 - (void)createBackgroundVerticalBarWithXCoord:(CGPoint)xCoord
                           withXAxisLabelIndex:(NSInteger)indexNumber
 {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 , 0, (self.graphWidth / [_graphData count]) - gapBetweenBackgroundVerticalBars, kDefaultGraphHeight * 2)];
+    CGFloat x = self.graphWidth % _graphData.count;
+    
+    // Update the frame size for graphData.count results that don't fit into graphWidth
+    [self setContentSize:CGSizeMake(self.graphWidth - x, self.frame.size.height)];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 , 0, (self.graphWidth / [_graphData count]) - kGapBetweenBackgroundVerticalBars, self.frame.size.height * 2)];
     
     label.textAlignment = NSTextAlignmentCenter;
     
@@ -238,7 +224,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     
     lineShape.path = linePath;
     CGPathRelease(linePath);
-    
+        
     [_graphView.layer addSublayer:lineShape];
     
     lineShape = nil;
@@ -249,7 +235,15 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     float granularity = 100;
     
     UIBezierPath *path = [UIBezierPath bezierPath];
-        
+    
+    NSMutableArray *mutableArray = [NSMutableArray arrayWithArray:points];
+    
+    [mutableArray insertObject:[points firstObject] atIndex:0];
+    
+    [mutableArray addObject:[points lastObject]];
+    
+    points = [NSArray arrayWithArray:mutableArray];
+    
     [path moveToPoint:[self pointAtIndex:0 ofArray:points]];
     
     for (int index = 1; index < points.count - 2 ; index++) {
@@ -293,7 +287,7 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
     shapeView.fillColor = [UIColor clearColor].CGColor;
     shapeView.lineWidth = self.strokeWidth;
     [shapeView setLineCap:kCALineCapRound];
-    
+        
     [self.graphView.layer addSublayer:shapeView];
 }
 
@@ -324,48 +318,6 @@ NSInteger const pointLabelOffsetFromPointCenter = -24;
         
         [_graphView addSubview:point];
     }
-}
-
-#pragma mark - Rotation methods
-
-- (void)enableRotation
-{
-    // Start generating notifications for orientation change
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate)
-                                                 name:UIDeviceOrientationDidChangeNotification
-                                               object:nil];
-}
-
-- (void)didRotate
-{
-    if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait) {
-        [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
-        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    }
-}
-
-- (BOOL)shouldAutorotate
-{
-    return NO;
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskLandscape;
-}
-
-#pragma mark - Memory warning and status bar
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
 }
 
 @end
