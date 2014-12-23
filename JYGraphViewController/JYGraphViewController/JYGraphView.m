@@ -233,6 +233,8 @@ NSInteger const kPointLabelHeight = 20;
     
     NSMutableArray *mutableArray = [NSMutableArray arrayWithArray:points];
     
+    [mutableArray insertObject:[points firstObject] atIndex:0];
+    
     [mutableArray addObject:[points lastObject]];
     
     points = [NSArray arrayWithArray:mutableArray];

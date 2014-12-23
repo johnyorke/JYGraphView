@@ -51,8 +51,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardUp:) name:UIKeyboardWillShowNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDown:) name:UIKeyboardWillHideNotification object:nil];
     }
     return self;
 }
@@ -67,19 +65,21 @@
     self.fontPicker.delegate = self;
     self.fontPicker.dataSource = self;
     
-    self.redSlider.value = 140;
-    self.greenSlider.value = 210;
-    self.blueSlider.value = 0;
+    self.redSlider.value = 43;
+    self.greenSlider.value = 94;
+    self.blueSlider.value = 155;
     self.alphaSlider.value = 1;
+    
+    self.curvedLine.on = YES;
     
     self.colourPreview.backgroundColor = [self colourFromSliders];
     
-    self.strokeColour = [UIColor colorWithRed:140.0f/255.0f green:210.0f/255.0f blue:0.0f alpha:1];
-    self.pointColour = [UIColor colorWithRed:181.0f/255.0f green:1 blue:50.0f/255.0f alpha:1];
-    self.graphBackgroundColour = [UIColor blackColor];
-    self.barColour = [UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:1];
-    self.fontColour = [UIColor whiteColor];
-    self.labelColour = [UIColor colorWithRed:60.0f/255 green:60.0f/255 blue:60.0f/255 alpha:0.75];
+    self.strokeColour = [self colourFromSliders];
+    self.pointColour = [UIColor colorWithRed:106.0f/255.0f green:166.0f/255.0f blue:220.0f/255.0f alpha:1];
+    self.graphBackgroundColour = [UIColor whiteColor];
+    self.barColour = [UIColor colorWithRed:230.0f/255 green:230.0f/255 blue:230.0f/255 alpha:1];
+    self.fontColour = [UIColor grayColor];
+    self.labelColour = [UIColor colorWithRed:60.0f/255 green:60.0f/255 blue:60.0f/255 alpha:0];
         
     [self.fontPicker selectRow:5 inComponent:0 animated:NO];
 }
@@ -315,29 +315,6 @@
     
     [self updateSliderLabels];
     self.colourPreview.backgroundColor = colour;
-}
-
-
-#pragma mark - Label and notifications
-
-- (void)keyboardUp:(NSNotification *)notification
-{
-    NSDictionary* info = [notification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height + kbSize.height);
-}
-
-- (void)keyboardDown:(NSNotification *)notification
-{
-    NSDictionary* info = [notification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height - kbSize.height);
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
