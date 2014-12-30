@@ -103,8 +103,6 @@
     return [[UIFont familyNames] count];
 }
 
-#pragma mark - Sample data
-
 - (NSArray *)createArrayToPassToGraph
 {
     // For test purposes only, set the values in the text fields
@@ -156,8 +154,6 @@
     return fontName;
 }
 
-#pragma mark - Rotation methods (required)
-
 - (IBAction)showGraph:(id)sender 
 {
     for (UIView *subview in self.graphContainerView.subviews) {
@@ -190,9 +186,7 @@
     graphView.labelFont = [UIFont fontWithName:[fontArray firstObject] size:12];
     graphView.labelFontColor = self.fontColour;
     graphView.labelBackgroundColor = self.labelColour;
-    
-    [graphView plotGraphData];
-    
+        
     [self.graphContainerView addSubview:graphView];
 }
 

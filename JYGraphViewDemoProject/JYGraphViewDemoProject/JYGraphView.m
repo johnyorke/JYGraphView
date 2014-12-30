@@ -33,6 +33,15 @@ NSInteger const kPointLabelHeight = 20;
     return self;
 }
 
+- (void)willMoveToSuperview:(UIView *)newSuperview
+{
+    [super willMoveToSuperview:newSuperview];
+    
+    if ([self.graphData count] > 0 && newSuperview != nil) {
+        [self plotGraphData];
+    }
+}
+
 - (void)setDefaultValues
 {
     // Set defaults values/options if none are set

@@ -22,8 +22,6 @@ graphView.graphData = @[@2,@4,@5,@7,@8,@10,@10,@10,@12,@10,@20,@21];
 graphView.graphXAxisLabels = @[@"Jan",@"Feb",@"Mar",@"Apr",@"May",@"Jun",@"Jul",@"Aug",@"Sep",@"Oct",@"Nov",@"Dec"];
 
 // NB. call this to graw the graph or refresh it if data has changed
-[graphView plotGraphData]
-
 [self.view addSubview:graphView];
 ```
 
@@ -33,6 +31,13 @@ If you don't set any of the colours, fonts, etc, the graph will be displayed in 
 
 The default content width of the `graphView` is twice the width of the frame. You can set your own width to either narrower or wider values simply by setting `graphWidth` before calling .
 
+**NB** The graph gets drawn on UIView's `didMoveToSuperview`, but in case you need to manually refresh the graph (if new data comes in) you can call it using `plotGraphData` like so:
+
+```obj-c
+graphView.graphData = newDataArray;
+
+[graphView plotGraphData];
+```
 
 # Files you'll need
 
