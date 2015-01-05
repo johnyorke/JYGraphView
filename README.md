@@ -2,7 +2,7 @@
 
 # JYGraphView
 
-JYGraphView is an easy way to graph data in a simple and minimalist style and is highly customisable.
+JYGraphView is an easy way to graph data in a simple, minimalist style and is highly customisable.
 
 <img src="https://raw.githubusercontent.com/johnyorke/JYGraphView/master/JYGraphViewDemoProject/Screenshots/graph.gif">
 
@@ -21,7 +21,6 @@ graphView.graphData = @[@2,@4,@5,@7,@8,@10,@10,@10,@12,@10,@20,@21];
 // Set the xAxis labels (optional)
 graphView.graphXAxisLabels = @[@"Jan",@"Feb",@"Mar",@"Apr",@"May",@"Jun",@"Jul",@"Aug",@"Sep",@"Oct",@"Nov",@"Dec"];
 
-// NB. call this to graw the graph or refresh it if data has changed
 [self.view addSubview:graphView];
 ```
 
