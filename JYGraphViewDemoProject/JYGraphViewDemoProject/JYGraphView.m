@@ -109,7 +109,7 @@ NSInteger const kPointLabelHeight = 20;
         
         NSInteger xCoord = (self.graphWidth / [_graphData count]) * counter;
         
-        float screenHeight = (self.frame.size.height - (kPointLabelHeight + kPointLabelOffsetFromPointCenter + kBarLabelHeight)) / self.frame.size.height; 
+        float screenHeight = (self.frame.size.height - (kPointLabelHeight + kPointLabelOffsetFromPointCenter)) / self.frame.size.height; 
         
         CGPoint point = CGPointMake(xCoord,
                                     self.frame.size.height - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((self.frame.size.height * screenHeight) / range)) - (lowest * ((self.frame.size.height * screenHeight) / range ))));
@@ -327,6 +327,31 @@ NSInteger const kPointLabelHeight = 20;
         
         [_graphView addSubview:point];
     }
+}
+
+- (UIImage *)imageOfCurrentGraph
+{
+    CGFloat scale = [self screenScale];
+    
+    if (scale > 1) {
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, scale);
+    } else {
+        UIGraphicsBeginImageContext(self.bounds.size);
+    }
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.layer renderInContext: context];
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return viewImage;
+}
+
+- (float) screenScale {
+    if ([ [UIScreen mainScreen] respondsToSelector: @selector(scale)] == YES) {
+        return [ [UIScreen mainScreen] scale];
+    }
+    return 1;
 }
 
 @end
