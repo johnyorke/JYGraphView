@@ -8,9 +8,22 @@
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController"/>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController">
+                    <items>
+                        <group width="1" height="80" alignment="left" contentMode="scaleAspectFit" radius="0.0" id="suO-rD-06d"/>
+                        <group width="1" height="80" alignment="left" contentMode="scaleAspectFill" radius="0.0" id="YA6-wx-ajO"/>
+                        <group width="1" height="80" alignment="left" contentMode="scaleAspectFill" radius="0.0" id="991-g0-VYs"/>
+                        <group width="1" height="80" alignment="left" contentMode="scaleAspectFill" radius="0.0" id="buW-1H-4Lq"/>
+                    </items>
+                    <connections>
+                        <outlet property="groupFour" destination="buW-1H-4Lq" id="spk-dw-2Lu"/>
+                        <outlet property="groupOne" destination="suO-rD-06d" id="u2t-Su-l9E"/>
+                        <outlet property="groupThree" destination="991-g0-VYs" id="70N-Uc-gJp"/>
+                        <outlet property="groupTwo" destination="YA6-wx-ajO" id="HYq-gl-WVh"/>
+                    </connections>
+                </controller>
             </objects>
-            <point key="canvasLocation" x="235" y="347"/>
+            <point key="canvasLocation" x="-143" y="154.5"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">
@@ -45,29 +58,6 @@
                 </glanceController>
             </objects>
             <point key="canvasLocation" x="-143" y="516"/>
-        </scene>
-        <!--Static Notification Interface Controller-->
-        <scene sceneID="AEw-b0-oYE">
-            <objects>
-                <notificationController id="YCC-NB-fut">
-                    <items>
-                        <label alignment="left" text="Alert Label" id="XkS-y5-khE"/>
-                    </items>
-                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
-                    <connections>
-                        <outlet property="notificationAlertLabel" destination="XkS-y5-khE" id="49B-RR-99y"/>
-                        <segue destination="gdX-wl-uQE" kind="relationship" relationship="dynamicNotificationInterface" id="fKh-qV-3T2"/>
-                    </connections>
-                </notificationController>
-            </objects>
-            <point key="canvasLocation" x="235" y="1001"/>
-        </scene>
-        <!--Notification Controller-->
-        <scene sceneID="KIl-fV-djm">
-            <objects>
-                <controller id="gdX-wl-uQE" customClass="NotificationController"/>
-            </objects>
-            <point key="canvasLocation" x="553" y="1001"/>
         </scene>
     </scenes>
 </document>

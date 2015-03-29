@@ -19,7 +19,6 @@
 		CA5006CB19A93CD800E993E6 /* JYGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA5006CA19A93CD800E993E6 /* JYGraphView.m */; };
 		CAD411471850B53D005C28F2 /* JYGraphPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD411461850B53D005C28F2 /* JYGraphPoint.m */; };
 		DF70F6DE1AB1FD5700F211A7 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF70F6DD1AB1FD5700F211A7 /* InterfaceController.m */; };
-		DF70F6E11AB1FD5700F211A7 /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF70F6E01AB1FD5700F211A7 /* NotificationController.m */; };
 		DF70F6E41AB1FD5700F211A7 /* GlanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF70F6E31AB1FD5700F211A7 /* GlanceController.m */; };
 		DF70F6E61AB1FD5700F211A7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF70F6E51AB1FD5700F211A7 /* Images.xcassets */; };
 		DF70F6EA1AB1FD5700F211A7 /* JYGraphViewDemoProject WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = DF70F6E91AB1FD5700F211A7 /* JYGraphViewDemoProject WatchKit App.app */; };
@@ -88,8 +87,6 @@
 		DF70F6DB1AB1FD5700F211A7 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		DF70F6DC1AB1FD5700F211A7 /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
 		DF70F6DD1AB1FD5700F211A7 /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
-		DF70F6DF1AB1FD5700F211A7 /* NotificationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
-		DF70F6E01AB1FD5700F211A7 /* NotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
 		DF70F6E21AB1FD5700F211A7 /* GlanceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlanceController.h; sourceTree = "<group>"; };
 		DF70F6E31AB1FD5700F211A7 /* GlanceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlanceController.m; sourceTree = "<group>"; };
 		DF70F6E51AB1FD5700F211A7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -189,8 +186,6 @@
 			children = (
 				DF70F6DC1AB1FD5700F211A7 /* InterfaceController.h */,
 				DF70F6DD1AB1FD5700F211A7 /* InterfaceController.m */,
-				DF70F6DF1AB1FD5700F211A7 /* NotificationController.h */,
-				DF70F6E01AB1FD5700F211A7 /* NotificationController.m */,
 				DF70F6E21AB1FD5700F211A7 /* GlanceController.h */,
 				DF70F6E31AB1FD5700F211A7 /* GlanceController.m */,
 				DF70F6E51AB1FD5700F211A7 /* Images.xcassets */,
@@ -374,7 +369,6 @@
 			files = (
 				DF70F6FF1AB1FED200F211A7 /* JYGraphView.m in Sources */,
 				DF70F7001AB1FFAD00F211A7 /* JYGraphPoint.m in Sources */,
-				DF70F6E11AB1FD5700F211A7 /* NotificationController.m in Sources */,
 				DF70F6DE1AB1FD5700F211A7 /* InterfaceController.m in Sources */,
 				DF70F6E41AB1FD5700F211A7 /* GlanceController.m in Sources */,
 			);
@@ -629,6 +623,7 @@
 				DF70F6FB1AB1FD5700F211A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DF70F6FD1AB1FD5700F211A7 /* Build configuration list for PBXNativeTarget "JYGraphViewDemoProject WatchKit Extension" */ = {
 			isa = XCConfigurationList;
@@ -637,6 +632,7 @@
 				DF70F6F91AB1FD5700F211A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
