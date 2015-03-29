@@ -61,6 +61,6 @@
 
 - (void)plotGraphData;
 
-- (UIImage *)imageOfCurrentGraph;
+- (UIImage *)graphImage;
 
 @end

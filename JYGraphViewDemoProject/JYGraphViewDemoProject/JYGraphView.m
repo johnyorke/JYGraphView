@@ -109,10 +109,17 @@ NSInteger const kPointLabelHeight = 20;
         
         NSInteger xCoord = (self.graphWidth / [_graphData count]) * counter;
         
-        float screenHeight = (self.frame.size.height - (kPointLabelHeight + kPointLabelOffsetFromPointCenter)) / self.frame.size.height; 
+        NSInteger offsets = kPointLabelHeight + kPointLabelOffsetFromPointCenter;
+        if (_hideLabels == NO && _graphDataLabels != nil) {
+            offsets += kBarLabelHeight;
+        }
         
+        NSInteger offSetFromTop = 5;
+        float screenHeight = (self.frame.size.height - (offsets)) / (self.frame.size.height + offSetFromTop);
+        
+        NSInteger offsetFromBottom = 10;
         CGPoint point = CGPointMake(xCoord,
-                                    self.frame.size.height - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((self.frame.size.height * screenHeight) / range)) - (lowest * ((self.frame.size.height * screenHeight) / range ))));
+                                    self.frame.size.height - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((self.frame.size.height * screenHeight) / range)) - (lowest * (((self.frame.size.height - offsetFromBottom) * screenHeight) / range ))));
         
         [self createBackgroundVerticalBarWithXCoord:point withXAxisLabelIndex:counter-1];
         
@@ -329,20 +336,28 @@ NSInteger const kPointLabelHeight = 20;
     }
 }
 
-- (UIImage *)imageOfCurrentGraph
+- (UIImage *)graphImage
 {
+    // These lines are to prevent cutting off of image
+    // on watch. Related to scrollview frame vs content size
+    CGRect scrollViewFrame = self.frame; // original frame to revert to
+    self.frame = _graphView.frame;
+    
     CGFloat scale = [self screenScale];
     
     if (scale > 1) {
-        UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, scale);
+        UIGraphicsBeginImageContextWithOptions(_graphView.frame.size, NO, scale);
     } else {
-        UIGraphicsBeginImageContext(self.bounds.size);
+        UIGraphicsBeginImageContext(_graphView.frame.size);
     }
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     [self.layer renderInContext: context];
     UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
+    // Now revert it
+    self.frame = scrollViewFrame;
     
     return viewImage;
 }

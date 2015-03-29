@@ -25,24 +25,23 @@
 
     // Configure interface objects here.
     
-    CGFloat width = self.contentFrame.size.width * 2;
+    CGFloat width = self.contentFrame.size.width;
+    CGFloat height = self.contentFrame.size.height;
     
-    JYGraphView *graphView = [[JYGraphView alloc] initWithFrame:CGRectMake(0, 0, width, 146)];
+    JYGraphView *graphView = [[JYGraphView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
     
-    graphView.graphWidth = width;
     graphView.graphData = @[@10,@11,@14,@13,@15,@18];
     graphView.useCurvedLine = YES;
     graphView.hidePoints = YES;
     graphView.backgroundViewColor = [UIColor clearColor];
     graphView.barColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.1];
     graphView.labelBackgroundColor = [UIColor clearColor];
-    graphView.labelFont = [UIFont systemFontOfSize:22];
+    graphView.labelFont = [UIFont systemFontOfSize:18];
     graphView.strokeWidth = 4;
-    graphView.strokeColor = [UIColor colorWithRed:53.0/255.0 green:185.0/255.0 blue:1 alpha:1];
     
     [graphView plotGraphData];
     
-    [_image setImage:[graphView imageOfCurrentGraph]];
+    [_image setImage:[graphView graphImage]];
     
     [self.label setText:@"\u00B0C - Next 6 hours"];
     

@@ -18,34 +18,33 @@
                 <glanceController spacing="0.0" topTemplateType="body1Large" bottomTemplateType="groupBody1Footer" id="0uZ-2p-rRc" customClass="GlanceController">
                     <items>
                         <label alignment="left" text="Current Temp" id="95Y-Bm-7Qg">
-                            <color key="textColor" red="0.36078431370000003" green="0.72549019609999998" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.70980392156862748" green="1" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </label>
-                        <label alignment="left" text="1234" id="vml-X2-TlE">
-                            <color key="textColor" red="0.36078431372549019" green="0.72549019607843135" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
-                        </label>
-                        <group alignment="left" backgroundImage="background" contentMode="scaleAspectFill" layout="vertical" id="uCw-4Q-Ouw">
+                        <label alignment="left" text="1234" id="vml-X2-TlE"/>
+                        <group alignment="left" contentMode="scaleAspectFill" layout="vertical" id="uCw-4Q-Ouw">
                             <items>
-                                <group width="1" height="1" alignment="left" layout="vertical" radius="0.0" spacing="4" id="a5f-U0-ifC">
+                                <label alignment="left" verticalAlignment="bottom" text="Label" id="4Cj-5g-Iy7"/>
+                                <group alignment="left" backgroundImage="background" layout="vertical" radius="0.0" spacing="4" id="a5f-U0-ifC">
                                     <items>
-                                        <imageView width="1" height="1" alignment="center" verticalAlignment="center" contentMode="scaleAspectFit" id="zHX-rB-3H0"/>
+                                        <imageView width="1" height="80" alignment="center" verticalAlignment="center" contentMode="scaleAspectFit" id="zHX-rB-3H0"/>
                                     </items>
                                     <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
                                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                 </group>
                             </items>
                         </group>
-                        <label alignment="left" text="Label" id="ci5-RC-MpE"/>
-                        <label alignment="left" text="Code available on GitHub" id="Fca-cd-R83"/>
+                        <label alignment="left" text="Label" id="qNZ-nT-r6Q"/>
+                        <label alignment="left" text="Tap to see more" id="Oca-ol-btA"/>
                     </items>
                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
                     <connections>
                         <outlet property="image" destination="zHX-rB-3H0" id="QIy-3k-rt9"/>
-                        <outlet property="label" destination="ci5-RC-MpE" id="YG0-p3-szq"/>
+                        <outlet property="label" destination="qNZ-nT-r6Q" id="7iQ-2f-22k"/>
                         <outlet property="titleLabel" destination="vml-X2-TlE" id="QyK-OZ-Cxh"/>
                     </connections>
                 </glanceController>
             </objects>
-            <point key="canvasLocation" x="-7" y="595"/>
+            <point key="canvasLocation" x="-143" y="516"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
