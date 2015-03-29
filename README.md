@@ -8,7 +8,7 @@
 
 <img src="https://raw.githubusercontent.com/johnyorke/JYGraphView/master/JYGraphViewDemoProject/Screenshots/watch_preview.gif">
 
-I've added a method to the class (`graphImage`)that can return a snapshot of the graph (as a UIImage) which can be used on the Apple Watch. You'll need to make some adjustments to the font size and stroke width but it's fun to experiment! Take a look at the sample app for examples.
+I've added a method to the class (`graphImage`) that can return a snapshot of the graph (as a UIImage) which can be used on the Apple Watch. You'll need to make some adjustments to the font size and stroke width but it's fun to experiment! Take a look at the sample app for examples.
 
 Typical usage:
 
