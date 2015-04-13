@@ -114,12 +114,15 @@ NSInteger const kPointLabelHeight = 20;
             offsets += kBarLabelHeight;
         }
         
-        NSInteger offSetFromTop = 5;
-        float screenHeight = (self.frame.size.height - (offsets)) / (self.frame.size.height + offSetFromTop);
-        
+        NSInteger offSetFromTop = 10;
         NSInteger offsetFromBottom = 10;
+        float screenHeight = (self.frame.size.height - (offsets)) / (self.frame.size.height + offSetFromTop + offsetFromBottom);
+        
         CGPoint point = CGPointMake(xCoord,
-                                    self.frame.size.height - (([[_graphData objectAtIndex:counter - 1] integerValue] * ((self.frame.size.height * screenHeight) / range)) - (lowest * (((self.frame.size.height - offsetFromBottom) * screenHeight) / range ))));
+                                    self.frame.size.height - (([[_graphData objectAtIndex:counter - 1] integerValue] * 
+                                                               ((self.frame.size.height * screenHeight) / range)) - 
+                                                              (lowest * ((self.frame.size.height * screenHeight) / range ))+
+                                                              offsetFromBottom));
         
         [self createBackgroundVerticalBarWithXCoord:point withXAxisLabelIndex:counter-1];
         

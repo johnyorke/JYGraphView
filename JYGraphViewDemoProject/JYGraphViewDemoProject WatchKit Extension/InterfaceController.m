@@ -26,7 +26,7 @@
     // Configure interface objects here.
     
     CGRect rect = CGRectMake(0, 0,self.contentFrame.size.width , 160);
-    NSArray *data = @[@22,@27,@33,@28,@29,@38];
+    NSArray *data = @[@-5,@-1,@0,@0,@2,@3];
     
     JYGraphView *one = [[JYGraphView alloc] initWithFrame:rect];
     one.graphData = data;
