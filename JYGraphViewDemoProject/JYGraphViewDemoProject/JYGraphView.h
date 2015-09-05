@@ -56,6 +56,12 @@
 // Font colour of the x and y axis labels
 @property (strong, nonatomic) UIColor *labelFontColor;
 
+// Font to use only on the x axis labels
+@property (strong, nonatomic) UIFont *labelXFont;
+
+// Font colour only on the x axis labels
+@property (strong, nonatomic) UIColor *labelXFontColor;
+
 // Colour of the background for the x and y axis UILabels
 @property (strong, nonatomic) UIColor *labelBackgroundColor;
 

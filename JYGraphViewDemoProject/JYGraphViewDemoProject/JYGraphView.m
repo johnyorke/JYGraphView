@@ -66,6 +66,12 @@ NSInteger const kPointLabelHeight = 20;
     if (!self.labelFontColor) {
         self.labelFontColor = [UIColor whiteColor];
     }
+    if (!self.labelXFont) {
+        self.labelXFont = self.labelFont;
+    }
+    if (!self.labelXFontColor) {
+        self.labelXFontColor = self.labelFontColor;
+    }
     if (!self.labelBackgroundColor) {
         self.labelBackgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.5f];
     }
@@ -205,11 +211,11 @@ NSInteger const kPointLabelHeight = 20;
     
     label.textAlignment = NSTextAlignmentCenter;
     
-    [label setTextColor:self.labelFontColor];
+    [label setTextColor:self.labelXFontColor];
     [label setBackgroundColor:self.barColor];
     [label setAdjustsFontSizeToFitWidth:YES];
     [label setMinimumScaleFactor:0.6];
-    [label setFont:self.labelFont];
+    [label setFont:self.labelXFont];
     [label setNumberOfLines:2];
     
     if (self.graphDataLabels) {
