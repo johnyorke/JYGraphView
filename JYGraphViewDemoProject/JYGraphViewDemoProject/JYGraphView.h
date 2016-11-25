@@ -65,6 +65,10 @@
 // Colour of the background for the x and y axis UILabels
 @property (strong, nonatomic) UIColor *labelBackgroundColor;
 
+// Nominal upper and lower Y axis limits
+@property (nonatomic, strong) NSNumber *upperYLimit;
+@property (nonatomic, strong) NSNumber *lowerYLimit;
+
 - (void)plotGraphData;
 
 - (UIImage *)graphImage;

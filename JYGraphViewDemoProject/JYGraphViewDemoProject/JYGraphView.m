@@ -168,9 +168,15 @@ NSInteger const kPointLabelHeight = 20;
 {
     array = [array sortedArrayUsingSelector:@selector(compare:)];
     
-    float lowest = [[array objectAtIndex:0] floatValue];
+    float lowest;
+    if (_lowerYLimit) {
+        lowest = _lowerYLimit.floatValue;
+    } else { lowest = [[array objectAtIndex:0] floatValue]; }
     
-    float highest = [[array objectAtIndex:[array count] - 1] floatValue];
+    float highest;
+    if (_upperYLimit ) {
+        highest = _upperYLimit.floatValue;
+    } else { highest = [[array objectAtIndex:[array count] - 1] floatValue]; }
     
     float range = highest - lowest;
     
