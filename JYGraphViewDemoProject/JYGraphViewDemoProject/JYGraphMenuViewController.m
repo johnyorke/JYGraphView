@@ -71,6 +71,7 @@
     self.alphaSlider.value = 1;
     
     self.curvedLine.on = YES;
+    self.hidePoints.on = YES;
     
     self.colourPreview.backgroundColor = [self colourFromSliders];
     
@@ -177,7 +178,7 @@
     graphView.useCurvedLine = self.curvedLine.isOn;
     graphView.hideLabels = self.hidelabels.isOn;
     graphView.strokeWidth = 4;
-    graphView.graphWidth = graphView.frame.size.width * 2;
+    graphView.graphWidth = graphView.frame.size.width;
     graphView.hidePoints = self.hidePoints.isOn;
     graphView.hideLines = self.hideLines.isOn;
     graphView.backgroundViewColor = self.graphBackgroundColour;
